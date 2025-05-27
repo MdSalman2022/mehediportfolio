@@ -5,14 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
-import ExperienceSection from "@/components/ExperienceSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import ProjectModal from "@/components/ProjectModal";
 import ScrollProgress from "@/components/ScrollProgress";
 import BackToTop from "@/components/BackToTop";
-import MouseFollowEffect from "@/components/MouseFollowEffect";
 
 export default function Home() {
   useEffect(() => {
@@ -37,9 +35,6 @@ export default function Home() {
         transition={{ duration: 0.5 }}
         className="min-h-screen bg-gray-900 text-white"
       >
-        {/* Mouse Follow Effect */}
-        <MouseFollowEffect />
-
         {/* Navigation */}
         <Navbar />
 
@@ -55,7 +50,8 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             <HeroSection />
-          </motion.div>{" "}
+          </motion.div>
+
           {/* About Section */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -65,15 +61,7 @@ export default function Home() {
           >
             <AboutSection />
           </motion.div>
-          {/* Experience Section */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-          >
-            <ExperienceSection />
-          </motion.div>
+
           {/* Projects Section */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -83,6 +71,7 @@ export default function Home() {
           >
             <ProjectsSection />
           </motion.div>
+
           {/* Contact Section */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -92,6 +81,7 @@ export default function Home() {
           >
             <ContactSection />
           </motion.div>
+
           {/* Footer */}
           <motion.div
             initial={{ opacity: 0 }}
