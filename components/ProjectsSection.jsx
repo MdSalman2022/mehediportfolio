@@ -101,26 +101,44 @@ export default function ProjectsSection() {
               animate={isInView ? "visible" : "hidden"}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
+              {" "}
               {projects.map((project, index) => (
                 <motion.div
                   key={project._id}
                   variants={itemVariants}
-                  className="group relative bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700/50 hover:border-blue-500/50 transition-all duration-300 hover:transform hover:scale-105"
+                  className="group relative bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700/50 hover:border-blue-500/50 transition-all duration-300 md:hover:transform md:hover:scale-105 cursor-pointer md:cursor-default"
+                  onClick={() => {
+                    // Only trigger on mobile/tablet devices
+                    if (window.innerWidth < 768) {
+                      openProjectModal(project);
+                    }
+                  }}
                 >
                   {/* Project Image */}
                   <div className="relative aspect-video overflow-hidden">
                     <img
                       src={project.img[0]}
                       alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full object-cover md:group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-60" />
-
-                    {/* Overlay on Hover */}
-                    <div className="absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    {/* Overlay on Hover - Desktop */}
+                    <div className="hidden md:flex absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center cursor-pointer">
                       <button
                         onClick={() => openProjectModal(project)}
                         className="px-6 py-3 bg-white/10 backdrop-blur-md text-white font-semibold rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300"
+                      >
+                        View Details
+                      </button>
+                    </div>{" "}
+                    {/* Mobile View Details Button */}
+                    <div className="md:hidden absolute bottom-3 right-3">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openProjectModal(project);
+                        }}
+                        className="px-4 py-2 bg-blue-600/90 backdrop-blur-md text-white text-sm font-semibold rounded-lg border border-blue-500/50 hover:bg-blue-600 transition-all duration-300 shadow-lg"
                       >
                         View Details
                       </button>

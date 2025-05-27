@@ -28,17 +28,28 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
   const handleNavClick = (sectionId) => {
-    smoothScrollTo(sectionId);
-    setMenuOpen(false);
+    console.log("Nav click:", sectionId, "Menu open:", isMenuOpen); // Debug log
+
+    // Close mobile menu first
+    if (isMenuOpen) {
+      setMenuOpen(false);
+    }
+
+    // Add a small delay for mobile to ensure menu animation completes
+    const delay = isMenuOpen && window.innerWidth < 768 ? 300 : 0;
+
+    setTimeout(() => {
+      console.log("Scrolling to:", sectionId); // Debug log
+      smoothScrollTo(sectionId);
+    }, delay);
   };
 
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-gray-900/95 backdrop-blur-md shadow-lg"
           : "bg-transparent"
@@ -132,8 +143,7 @@ export default function Navbar() {
             )}
           </motion.button>
         </div>
-      </div>
-
+      </div>{" "}
       {/* Mobile Navigation */}
       <motion.div
         initial={{ opacity: 0, height: 0 }}
@@ -141,7 +151,11 @@ export default function Navbar() {
           opacity: isMenuOpen ? 1 : 0,
           height: isMenuOpen ? "auto" : 0,
         }}
-        className="md:hidden bg-gray-900/95 backdrop-blur-md border-t border-gray-800"
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className={`md:hidden overflow-hidden bg-gray-900/95 backdrop-blur-md border-t border-gray-800`}
+        style={{
+          display: isMenuOpen ? "block" : "none",
+        }}
       >
         <div className="px-4 py-4 space-y-2">
           {navItems.map((item) => (

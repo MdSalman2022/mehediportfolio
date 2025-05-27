@@ -14,10 +14,8 @@ export default function ScrollProgress() {
         document.documentElement.scrollHeight - window.innerHeight;
       const progress = (window.scrollY / totalHeight) * 100;
       setScrollProgress(progress);
-      setScrollY(window.scrollY);
-
-      // Update active section based on scroll position
-      const sections = ["hero", "about", "projects", "contact"];
+      setScrollY(window.scrollY); // Update active section based on scroll position
+      const sections = ["hero", "about", "experience", "projects", "contact"];
       const sectionElements = sections.map((id) => document.getElementById(id));
 
       let activeSection = "hero";

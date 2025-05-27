@@ -4,7 +4,7 @@
 
 Welcome to my personal portfolio website! This is where I showcase my passion for creating innovative web applications and my journey as a software developer. Built with modern technologies and a focus on exceptional user experience.
 
-🌐 **Live Site:** [https://mehedi-portfolio.vercel.app](https://mehedi-portfolio.vercel.app)
+🌐 **Live Site:** [https://mehediportfolio-omega.vercel.app/](https://mehediportfolio-omega.vercel.app/)
 
 ## 🚀 About Me
 
@@ -149,6 +149,6 @@ I'm always interested in new opportunities, collaborations, or just having a cha
 - 📧 **Email:** [mehedi.salman102@gmail.com](mailto:mehedi.salman102@gmail.com)
 - 💼 **LinkedIn:** [mehedihasan-salman](https://www.linkedin.com/in/mehedihasan-salman/)
 - 🐙 **GitHub:** [MdSalman2022](https://github.com/MdSalman2022)
-- 🌐 **Portfolio:** [https://mehedi-portfolio.vercel.app](https://mehedi-portfolio.vercel.app)
+- 🌐 **Portfolio:** [https://mehediportfolio-omega.vercel.app/](https://mehediportfolio-omega.vercel.app/)
 
 **⭐ If you found this portfolio helpful or inspiring, please give it a star!**
