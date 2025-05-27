@@ -42,38 +42,14 @@ export default function HeroSection() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_50%)]" />
         </div>
       </div>
-      {/* Floating Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(30)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-blue-400/30 rounded-full"
-            initial={{
-              x: Math.random() * window?.innerWidth || 1920,
-              y: Math.random() * window?.innerHeight || 1080,
-            }}
-            animate={{
-              y: [0, -50, 0],
-              x: [0, Math.random() * 50 - 25, 0],
-              opacity: [0.3, 0.8, 0.3],
-            }}
-            transition={{
-              duration: Math.random() * 8 + 12,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="space-y-8"
+          className="space-y-8 mt-20 md:mt-0"
         >
-          {/* Name and Title */}
           <div className="space-y-4">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
@@ -111,7 +87,6 @@ export default function HeroSection() {
             optimized, secure, and maintainable code that drives business
             success and exceptional user experiences.
           </motion.p>
-          {/* Skills Grid */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -132,7 +107,6 @@ export default function HeroSection() {
               </motion.div>
             ))}
           </motion.div>
-          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -156,7 +130,6 @@ export default function HeroSection() {
               Download Full CV
             </a>
           </motion.div>
-          {/* Scroll Indicator */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

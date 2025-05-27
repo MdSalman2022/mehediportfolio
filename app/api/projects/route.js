@@ -10,11 +10,8 @@ export async function GET() {
     // Check if collection exists and has documents
     const count = await collection.countDocuments();
     console.log(`📊 Found ${count} projects in database`);
-
     if (count === 0) {
-      console.log(
-        "⚠️ No projects found in database. You may need to seed the database first."
-      );
+      console.log("⚠️ No projects found in database.");
       return Response.json([], { status: 200 });
     }
 
