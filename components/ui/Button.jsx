@@ -25,11 +25,11 @@ const Button = forwardRef(
 
     const variants = {
       primary:
-        "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-lg hover:shadow-blue-500/25 focus:ring-blue-500",
+        "bg-gray-700 text-white hover:bg-gray-600 hover:shadow-lg hover:shadow-gray-700/25 focus:ring-gray-600",
       secondary:
         "bg-transparent border border-gray-600 text-gray-300 hover:bg-gray-800 hover:border-gray-500 focus:ring-gray-500",
       outline:
-        "bg-transparent border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white focus:ring-blue-500",
+        "bg-transparent border-2 border-gray-600 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-gray-500",
       ghost:
         "bg-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 focus:ring-gray-500",
     };
@@ -62,7 +62,6 @@ const Button = forwardRef(
       </>
     );
 
-    // Handle different element types
     const Component = as;
     const elementProps = {
       ref,
@@ -71,7 +70,6 @@ const Button = forwardRef(
       ...props,
     };
 
-    // Add type for buttons only
     if (as === "button") {
       elementProps.type = type;
       elementProps.onClick = onClick;
@@ -87,7 +85,7 @@ const Button = forwardRef(
           <span className="relative z-10 flex items-center gap-3 cursor-pointer">
             {buttonContent}
           </span>
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-lg" />
+          <div className="absolute inset-0 bg-gray-600 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-lg" />
         </motion.button>
       );
     }

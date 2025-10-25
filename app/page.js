@@ -12,19 +12,15 @@ import Footer from "@/components/Footer";
 import ProjectModal from "@/components/ProjectModal";
 import ScrollProgress from "@/components/ScrollProgress";
 import BackToTop from "@/components/BackToTop";
-import MouseFollowEffect from "@/components/MouseFollowEffect";
 
 export default function Home() {
   useEffect(() => {
-    // Smooth scrolling polyfill for older browsers
     if (typeof window !== "undefined") {
       import("smoothscroll-polyfill")
         .then((smoothscroll) => {
           smoothscroll.polyfill();
         })
-        .catch(() => {
-          // Polyfill not available, but smooth scroll should still work in modern browsers
-        });
+        .catch(() => {});
     }
   }, []);
 
@@ -37,18 +33,11 @@ export default function Home() {
         transition={{ duration: 0.5 }}
         className="min-h-screen bg-gray-900 text-white"
       >
-        {/* Mouse Follow Effect */}
-        <MouseFollowEffect />
-
-        {/* Navigation */}
         <Navbar />
 
-        {/* Scroll Progress Indicator */}
         <ScrollProgress />
 
-        {/* Main Content */}
         <div className="relative">
-          {/* Hero Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -56,7 +45,6 @@ export default function Home() {
           >
             <HeroSection />
           </motion.div>{" "}
-          {/* About Section */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -65,7 +53,6 @@ export default function Home() {
           >
             <AboutSection />
           </motion.div>
-          {/* Experience Section */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -74,7 +61,6 @@ export default function Home() {
           >
             <ExperienceSection />
           </motion.div>
-          {/* Projects Section */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -83,7 +69,6 @@ export default function Home() {
           >
             <ProjectsSection />
           </motion.div>
-          {/* Contact Section */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -92,7 +77,6 @@ export default function Home() {
           >
             <ContactSection />
           </motion.div>
-          {/* Footer */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -103,15 +87,10 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Modals */}
         <ProjectModal />
-
-        {/* Back to Top Button */}
         <BackToTop />
-
-        {/* Background Effects */}
         <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
           <div
             className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"
             style={{ animationDelay: "2s" }}

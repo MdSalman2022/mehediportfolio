@@ -31,7 +31,7 @@ export default function BackToTop() {
           whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => smoothScrollTo("hero")}
-          className="fixed bottom-8 right-8 z-40 p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
+          className="fixed bottom-8 right-8 z-40 p-3 bg-primary text-white rounded-full shadow-lg hover:shadow-blue-500/25 transition-all duration-300 cursor-pointer"
           aria-label="Back to top"
         >
           <ArrowUp className="w-6 h-6" />

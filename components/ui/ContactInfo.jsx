@@ -16,15 +16,15 @@ const ContactInfoItem = ({ icon: Icon, label, value, href, index }) => {
       transition={{ duration: 0.4, delay: index * 0.1 }}
     >
       <Card className="flex items-center gap-4 p-4" hover>
-        <div className="flex-shrink-0 w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center border border-blue-600/30">
-          <Icon className="w-5 h-5 text-blue-400" />
+        <div className="flex-shrink-0 w-12 h-12 bg-gray-700/50 rounded-lg flex items-center justify-center border border-gray-600/30">
+          <Icon className="w-5 h-5 text-gray-400" />
         </div>
         <div>
           <h4 className="text-white font-semibold">{label}</h4>
           {href ? (
             <a
               href={href}
-              className="text-gray-400 hover:text-blue-400 transition-colors"
+              className="text-gray-400 hover:text-gray-300 transition-colors"
             >
               {value}
             </a>

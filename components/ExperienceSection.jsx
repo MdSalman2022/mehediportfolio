@@ -54,7 +54,6 @@ export default function ExperienceSection() {
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.8 }}
         >
-          {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -62,7 +61,10 @@ export default function ExperienceSection() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Professional <span className="text-blue-400">Experience</span>
+              Professional{" "}
+              <span className="text-primary font-bold border-b-2 border-primary">
+                Experience
+              </span>
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
               My journey as a Full Stack Developer with a focus on enterprise
@@ -70,7 +72,6 @@ export default function ExperienceSection() {
             </p>
           </motion.div>
 
-          {/* Experience Timeline */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
@@ -85,39 +86,39 @@ export default function ExperienceSection() {
                   isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
                 }
                 transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-                className="relative pl-8 mb-12 border-l-2 border-blue-600/50 pb-8"
+                className="relative pl-8 mb-12 border-l-2 border-primary/30 pb-8"
               >
-                <div className="absolute -left-3 top-0 w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center">
+                <div className="absolute -left-3 top-0 w-6 h-6 rounded-full bg-primary flex items-center justify-center">
                   <Building className="w-3 h-3 text-white" />
                 </div>
 
                 <div className="bg-gray-800/80 p-6 rounded-xl border border-gray-700 backdrop-blur-sm">
                   <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
                     <div>
-                      <h3 className="text-2xl font-bold text-white">
+                      <h3 className="text-2xl font-bold text-white border-b border-primary/30 pb-2 mb-2">
                         {job.position}
                       </h3>
                       <div className="flex items-center mt-2 text-gray-300">
-                        <Briefcase className="w-4 h-4 mr-2 text-blue-400" />
+                        <Briefcase className="w-4 h-4 mr-2 text-primary" />
                         <span className="mr-3">{job.company}</span>
-                        <MapPin className="w-4 h-4 mr-2 text-blue-400" />
+                        <MapPin className="w-4 h-4 mr-2 text-primary" />
                         <span>{job.location}</span>
                       </div>
                     </div>
-                    <div className="mt-2 md:mt-0 flex items-center px-4 py-2 bg-blue-600/20 text-blue-300 rounded-full text-sm">
+                    <div className="mt-2 md:mt-0 flex items-center px-4 py-2 bg-primary/20 text-primary rounded-full text-sm">
                       <Calendar className="w-4 h-4 mr-2" />
                       {job.period}
                     </div>
                   </div>
 
                   <div className="mt-4">
-                    <h4 className="text-lg font-semibold text-blue-400 mb-3">
+                    <h4 className="text-lg font-semibold text-white mb-3 border-b border-primary/30 pb-2">
                       Key Responsibilities
                     </h4>
                     <ul className="space-y-3">
                       {job.responsibilities.map((item, i) => (
                         <li key={i} className="flex">
-                          <ChevronRight className="w-5 h-5 text-blue-400 mr-2 flex-shrink-0 mt-1" />
+                          <ChevronRight className="w-5 h-5 text-primary mr-2 flex-shrink-0 mt-1" />
                           <p className="text-gray-300">{item}</p>
                         </li>
                       ))}
@@ -125,14 +126,14 @@ export default function ExperienceSection() {
                   </div>
 
                   <div className="mt-6">
-                    <h4 className="text-lg font-semibold text-blue-400 mb-3">
+                    <h4 className="text-lg font-semibold text-white mb-3 border-b border-primary/30 pb-2">
                       Technologies Used
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {job.technologies.map((tech, i) => (
                         <span
                           key={i}
-                          className="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-full text-sm border border-blue-800/50"
+                          className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm border border-primary/30"
                         >
                           {tech}
                         </span>

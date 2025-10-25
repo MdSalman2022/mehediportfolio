@@ -29,18 +29,16 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   const handleNavClick = (sectionId) => {
-    console.log("Nav click:", sectionId, "Menu open:", isMenuOpen); // Debug log
+    console.log("Nav click:", sectionId, "Menu open:", isMenuOpen);
 
-    // Close mobile menu first
     if (isMenuOpen) {
       setMenuOpen(false);
     }
 
-    // Add a small delay for mobile to ensure menu animation completes
     const delay = isMenuOpen && window.innerWidth < 768 ? 300 : 0;
 
     setTimeout(() => {
-      console.log("Scrolling to:", sectionId); // Debug log
+      console.log("Scrolling to:", sectionId);
       smoothScrollTo(sectionId);
     }, delay);
   };
@@ -57,18 +55,16 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="text-2xl font-bold text-white cursor-pointer"
+            className="text-2xl font-bold cursor-pointer"
             onClick={() => handleNavClick("hero")}
           >
-            <span className="text-blue-400">Mehedi</span>
-            <span>.dev</span>
+            <span className="text-primary font-extrabold">Mehedi</span>
+            <span className="text-white">.dev</span>
           </motion.div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item, index) => (
               <motion.button
@@ -79,7 +75,7 @@ export default function Navbar() {
                 onClick={() => handleNavClick(item.id)}
                 className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 cursor-pointer ${
                   activeSection === item.id
-                    ? "text-blue-400"
+                    ? "text-white"
                     : "text-gray-300 hover:text-white"
                 }`}
               >
@@ -87,14 +83,13 @@ export default function Navbar() {
                 {activeSection === item.id && (
                   <motion.div
                     layoutId="activeTab"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-400"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
                   />
                 )}
               </motion.button>
             ))}
           </div>
 
-          {/* Social Links */}
           <div className="hidden md:flex items-center space-x-4">
             <motion.a
               initial={{ opacity: 0, scale: 0 }}
@@ -103,7 +98,7 @@ export default function Navbar() {
               href="https://github.com/MdSalman2022"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-gray-400 hover:text-white transition-colors"
+              className="p-2 text-gray-400 hover:text-white transition-colors cursor-pointer"
             >
               <Github className="w-5 h-5" />
             </motion.a>
@@ -114,7 +109,7 @@ export default function Navbar() {
               href="https://www.linkedin.com/in/mehedihasan-salman/"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-gray-400 hover:text-white transition-colors"
+              className="p-2 text-gray-400 hover:text-white transition-colors cursor-pointer"
             >
               <Linkedin className="w-5 h-5" />
             </motion.a>
@@ -123,18 +118,17 @@ export default function Navbar() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.7 }}
               href="mailto:mehedi.salman102@gmail.com"
-              className="p-2 text-gray-400 hover:text-white transition-colors"
+              className="p-2 text-gray-400 hover:text-white transition-colors cursor-pointer"
             >
               <Mail className="w-5 h-5" />
             </motion.a>
           </div>
 
-          {/* Mobile menu button */}
           <motion.button
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             onClick={() => setMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-gray-400 hover:text-white"
+            className="md:hidden p-2 text-gray-400 hover:text-white cursor-pointer"
           >
             {isMenuOpen ? (
               <X className="w-6 h-6" />
@@ -144,7 +138,6 @@ export default function Navbar() {
           </motion.button>
         </div>
       </div>{" "}
-      {/* Mobile Navigation */}
       <motion.div
         initial={{ opacity: 0, height: 0 }}
         animate={{
@@ -162,9 +155,9 @@ export default function Navbar() {
             <button
               key={item.id}
               onClick={() => handleNavClick(item.id)}
-              className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors ${
+              className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors cursor-pointer ${
                 activeSection === item.id
-                  ? "text-blue-400 bg-blue-400/10"
+                  ? "text-white bg-gray-700/50"
                   : "text-gray-300 hover:text-white hover:bg-gray-800"
               }`}
             >
@@ -172,13 +165,12 @@ export default function Navbar() {
             </button>
           ))}
 
-          {/* Mobile Social Links */}
           <div className="flex items-center justify-center space-x-6 pt-4 border-t border-gray-800">
             <a
               href="https://github.com/MdSalman2022"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-gray-400 hover:text-white transition-colors"
+              className="p-2 text-gray-400 hover:text-white transition-colors cursor-pointer"
             >
               <Github className="w-5 h-5" />
             </a>
@@ -186,13 +178,13 @@ export default function Navbar() {
               href="https://www.linkedin.com/in/mehedihasan-salman/"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-gray-400 hover:text-white transition-colors"
+              className="p-2 text-gray-400 hover:text-white transition-colors cursor-pointer"
             >
               <Linkedin className="w-5 h-5" />
             </a>
             <a
               href="mailto:mehedi.salman102@gmail.com"
-              className="p-2 text-gray-400 hover:text-white transition-colors"
+              className="p-2 text-gray-400 hover:text-white transition-colors cursor-pointer"
             >
               <Mail className="w-5 h-5" />
             </a>

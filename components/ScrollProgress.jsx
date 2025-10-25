@@ -14,7 +14,7 @@ export default function ScrollProgress() {
         document.documentElement.scrollHeight - window.innerHeight;
       const progress = (window.scrollY / totalHeight) * 100;
       setScrollProgress(progress);
-      setScrollY(window.scrollY); // Update active section based on scroll position
+      setScrollY(window.scrollY);
       const sections = ["hero", "about", "experience", "projects", "contact"];
       const sectionElements = sections.map((id) => document.getElementById(id));
 
@@ -41,7 +41,7 @@ export default function ScrollProgress() {
     <motion.div
       initial={{ scaleX: 0 }}
       animate={{ scaleX: scrollProgress / 100 }}
-      className="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-500 to-purple-600 z-50 origin-left"
+      className="fixed top-0 left-0 h-1 bg-primary z-50 origin-left"
       style={{ width: "100%" }}
     />
   );

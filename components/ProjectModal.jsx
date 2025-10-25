@@ -28,7 +28,6 @@ export default function ProjectModal() {
             className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-gray-900 rounded-2xl shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
             <button
               onClick={closeProjectModal}
               className="absolute top-4 right-4 z-10 p-2 bg-gray-800/80 rounded-full hover:bg-gray-700 transition-colors"
@@ -36,7 +35,6 @@ export default function ProjectModal() {
               <X className="w-5 h-5 text-white" />
             </button>
 
-            {/* Header with main image */}
             <div className="relative h-64 md:h-80 overflow-hidden rounded-t-2xl">
               <img
                 src={selectedProject.img[0]}
@@ -46,9 +44,7 @@ export default function ProjectModal() {
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
             </div>
 
-            {/* Content */}
             <div className="p-6 md:p-8">
-              {/* Title and Links */}
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 md:mb-0">
                   {selectedProject.title}
@@ -59,7 +55,7 @@ export default function ProjectModal() {
                       href={selectedProject.sitelink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                      className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors"
                     >
                       <ExternalLink className="w-4 h-4" />
                       Live Site
@@ -79,7 +75,6 @@ export default function ProjectModal() {
                 </div>
               </div>
 
-              {/* Technologies */}
               <div className="mb-6">
                 <h3 className="text-xl font-semibold text-white mb-3">
                   Technologies Used
@@ -88,7 +83,7 @@ export default function ProjectModal() {
                   {selectedProject.technologies.map((tech, index) => (
                     <span
                       key={index}
-                      className="px-3 py-1 bg-blue-600/20 text-blue-300 rounded-full text-sm border border-blue-600/30"
+                      className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm border border-primary/30"
                     >
                       {tech}
                     </span>
@@ -96,7 +91,6 @@ export default function ProjectModal() {
                 </div>
               </div>
 
-              {/* Description */}
               <div className="mb-6">
                 <h3 className="text-xl font-semibold text-white mb-3">
                   About the Project
@@ -106,7 +100,6 @@ export default function ProjectModal() {
                 </p>
               </div>
 
-              {/* Additional Images */}
               {selectedProject.img.length > 1 && (
                 <div>
                   <h3 className="text-xl font-semibold text-white mb-4">

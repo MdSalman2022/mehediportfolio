@@ -37,7 +37,6 @@ export default function Footer() {
     <footer className="bg-gray-900 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand Section */}
           <div className="md:col-span-2">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -46,7 +45,7 @@ export default function Footer() {
               className="space-y-4"
             >
               <div className="text-2xl font-bold text-white">
-                <span className="text-blue-400">Mehedi</span>
+                <span className="text-primary">Mehedi</span>
                 <span>.dev</span>
               </div>{" "}
               <p className="text-gray-400 max-w-md leading-relaxed">
@@ -65,7 +64,7 @@ export default function Footer() {
                     initial={{ opacity: 0, scale: 0 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
-                    className="p-2 bg-gray-800 hover:bg-blue-600 text-gray-400 hover:text-white rounded-lg transition-all duration-300"
+                    className="p-2 bg-gray-800 hover:bg-primary text-gray-400 hover:text-white rounded-lg transition-all duration-300"
                     aria-label={link.label}
                   >
                     <link.icon className="w-5 h-5" />
@@ -75,7 +74,6 @@ export default function Footer() {
             </motion.div>
           </div>
 
-          {/* Quick Links */}
           <div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -99,7 +97,6 @@ export default function Footer() {
             </motion.div>
           </div>
 
-          {/* Services */}
           <div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -119,7 +116,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -130,10 +126,9 @@ export default function Footer() {
             <span>© {currentYear} Mehedi.dev.</span>
           </div>
 
-          {/* Back to Top Button */}
           <motion.button
             onClick={() => smoothScrollTo("hero")}
-            className="flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-blue-600 text-gray-300 hover:text-white rounded-lg transition-all duration-300 group"
+            className="flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-primary text-gray-300 hover:text-white rounded-lg transition-all duration-300 group"
             whileHover={{ y: -2 }}
             whileTap={{ y: 0 }}
           >

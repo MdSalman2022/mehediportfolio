@@ -19,8 +19,7 @@ const Section = ({
     default: "py-20",
     dark: "py-20 bg-gray-800/30",
     darker: "py-20 bg-gray-800/50",
-    gradient:
-      "py-20 bg-gradient-to-br from-gray-900 via-blue-900/20 to-gray-900",
+    gradient: "py-20 bg-gray-800/20",
   };
 
   const sectionClasses = `${backgroundVariants[backgroundVariant]} ${className}`;

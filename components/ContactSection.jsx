@@ -41,7 +41,6 @@ export default function ContactSection() {
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.6 }}
         >
-          {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -49,7 +48,10 @@ export default function ContactSection() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Contact <span className="text-blue-400">Information</span>
+              Contact{" "}
+              <span className="font-bold border-b-2 border-primary pb-1 text-primary">
+                Information
+              </span>
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
               Interested in discussing job opportunities or collaboration? I'd
@@ -58,7 +60,6 @@ export default function ContactSection() {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Info */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
@@ -66,7 +67,7 @@ export default function ContactSection() {
               className="space-y-6"
             >
               <div>
-                <h3 className="text-2xl font-bold text-white mb-4">
+                <h3 className="text-2xl font-bold text-white mb-4 border-b border-primary pb-2">
                   Let's Connect
                 </h3>
                 <p className="text-gray-400 leading-relaxed mb-6">
@@ -78,7 +79,6 @@ export default function ContactSection() {
 
               <ContactInfo items={contactInfo} />
 
-              {/* Availability */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={
@@ -86,10 +86,10 @@ export default function ContactSection() {
                 }
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                <Card className="p-6 bg-green-600/10 border border-green-600/30">
+                <Card className="p-6 bg-primary/20 border border-primary/30">
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
-                    <span className="text-green-400 font-semibold">
+                    <div className="w-3 h-3 bg-primary/40 rounded-full animate-pulse" />
+                    <span className="text-primary font-semibold">
                       Available for new projects
                     </span>
                   </div>
@@ -101,7 +101,6 @@ export default function ContactSection() {
               </motion.div>
             </motion.div>
 
-            {/* Contact Form */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}

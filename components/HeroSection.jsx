@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 import {
   ArrowDown,
   Download,
@@ -31,15 +32,20 @@ const skills = [
 ];
 
 export default function HeroSection() {
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+  };
+
   return (
     <section
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900">
+      <div className="absolute inset-0 bg-gray-900">
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.05),transparent_50%)]" />
         </div>
       </div>
 
@@ -58,9 +64,7 @@ export default function HeroSection() {
               className="text-5xl md:text-7xl lg:text-8xl font-bold text-white"
             >
               Hi, I'm{" "}
-              <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-                Mehedi
-              </span>
+              <span className="text-primary font-extrabold">Mehedi</span>
             </motion.h1>{" "}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -69,12 +73,11 @@ export default function HeroSection() {
               className="text-xl md:text-2xl lg:text-3xl text-gray-300"
             >
               <span className="block">Full Stack Developer</span>
-              <span className="text-blue-400 font-semibold">
+              <span className="text-primary font-semibold">
                 Specialized in Web & Cloud Solutions
               </span>
             </motion.div>
           </div>{" "}
-          {/* Description */}
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -91,19 +94,57 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto mt-12"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto mt-12 perspective"
+            style={{ perspective: "1000px" }}
           >
             {skills.map((skill, index) => (
               <motion.div
                 key={skill.label}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
-                className="p-6 bg-gray-800/50 rounded-xl border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800/70 transition-all duration-300"
+                initial={{
+                  opacity: 0,
+                  y: 30,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 30,
+                  delay: index * 0.1,
+                }}
+                className="p-6 bg-gray-800/50 rounded-xl border border-gray-700/50 backdrop-blur-sm hover:border-primary hover:shadow-lg hover:shadow-primary/50 transition-all duration-300 cursor-pointer"
               >
-                <skill.icon className="w-8 h-8 text-blue-400 mx-auto mb-3" />
-                <h3 className="text-white font-semibold mb-2">{skill.label}</h3>
-                <p className="text-gray-400 text-sm">{skill.description}</p>
+                <motion.div>
+                  <motion.div
+                    animate={
+                      hoveredIndex === index
+                        ? { scale: 1.2, y: -5 }
+                        : { scale: 1, y: 0 }
+                    }
+                    transition={{ duration: 0.3 }}
+                  >
+                    <skill.icon className="w-8 h-8 text-primary mx-auto mb-3" />
+                  </motion.div>
+
+                  <h3 className="text-white font-semibold mb-2 border-b border-primary/30 pb-2 hover:border-primary transition-colors">
+                    {skill.label}
+                  </h3>
+
+                  <motion.p
+                    initial={{ opacity: 0.6, color: "#9CA3AF" }}
+                    animate={
+                      hoveredIndex === index
+                        ? { opacity: 1, color: "#E5E7EB" }
+                        : { opacity: 0.6, color: "#9CA3AF" }
+                    }
+                    transition={{ duration: 0.3 }}
+                    className="text-sm"
+                  >
+                    {skill.description}
+                  </motion.p>
+                </motion.div>
               </motion.div>
             ))}
           </motion.div>
@@ -116,15 +157,14 @@ export default function HeroSection() {
             {" "}
             <button
               onClick={() => smoothScrollTo("projects")}
-              className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg overflow-hidden hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
+              className="group relative px-8 py-4 bg-primary text-white font-semibold rounded-lg overflow-hidden hover:bg-primary/90 transition-all duration-300 border border-primary shadow-lg shadow-primary/30 cursor-pointer"
             >
               <span className="relative z-10">View My Work</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </button>
             <a
               href="/Mehedi-hasan-salman-full-stack-developer.pdf"
               download
-              className="group flex items-center gap-2 px-8 py-4 bg-transparent border border-gray-600 text-gray-300 font-semibold rounded-lg hover:bg-gray-800 hover:border-gray-500 transition-all duration-300"
+              className="group flex items-center gap-2 px-8 py-4 bg-transparent border border-gray-600 text-gray-300 font-semibold rounded-lg hover:bg-gray-800 hover:border-gray-500 transition-all duration-300 cursor-pointer"
             >
               <Download className="w-4 h-4" />
               Download Full CV

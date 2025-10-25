@@ -1,24 +1,19 @@
 import { create } from "zustand";
 
 export const usePortfolioStore = create((set, get) => ({
-  // Projects state
   projects: [],
   isProjectsLoading: false,
   projectsError: null,
 
-  // UI state
   activeSection: "hero",
   isMenuOpen: false,
   scrollY: 0,
 
-  // Theme state
   isDarkMode: true,
 
-  // Modal state
   selectedProject: null,
   isProjectModalOpen: false,
 
-  // Actions
   setProjects: (projects) => set({ projects }),
   setProjectsLoading: (loading) => set({ isProjectsLoading: loading }),
   setProjectsError: (error) => set({ projectsError: error }),
@@ -40,7 +35,6 @@ export const usePortfolioStore = create((set, get) => ({
       isProjectModalOpen: false,
     }),
 
-  // Async actions
   fetchProjects: async () => {
     set({ isProjectsLoading: true, projectsError: null });
     try {

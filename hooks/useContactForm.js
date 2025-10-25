@@ -59,7 +59,6 @@ export const useContactForm = () => {
       setIsSubmitted(true);
       reset();
 
-      // Reset success message after 5 seconds
       setTimeout(() => setIsSubmitted(false), 5000);
     } catch (error) {
       console.error("Error sending message:", error);
