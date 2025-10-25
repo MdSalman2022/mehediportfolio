@@ -52,7 +52,7 @@ const skillCategories = [
       "Python",
       "RESTful APIs",
       "Socket.io",
-      "Microservices",
+      "RBAC",
     ],
     colorClasses: {
       bg: "bg-green-600/20",
