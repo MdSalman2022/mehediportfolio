@@ -1,31 +1,19 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef, useEffect } from "react";
-import { ExternalLink, Github, Loader2 } from "lucide-react";
-import { usePortfolioStore } from "@/store/portfolioStore";
-import { truncateText } from "@/lib/utils";
+import {motion, useInView} from "framer-motion";
+import {useRef} from "react";
+import {ExternalLink, Github} from "lucide-react";
+import {usePortfolioStore} from "@/store/portfolioStore";
+import {truncateText} from "@/lib/utils";
 
-export default function ProjectsSection() {
+export default function ProjectsSection({projects = []}) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, {once: true, margin: "-100px"});
 
-  const {
-    projects,
-    isProjectsLoading,
-    projectsError,
-    fetchProjects,
-    openProjectModal,
-  } = usePortfolioStore();
-
-  useEffect(() => {
-    if (projects.length === 0 && !isProjectsLoading) {
-      fetchProjects();
-    }
-  }, [projects.length, isProjectsLoading]);
+  const {openProjectModal} = usePortfolioStore();
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: {opacity: 0},
     visible: {
       opacity: 1,
       transition: {
@@ -35,7 +23,7 @@ export default function ProjectsSection() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: {opacity: 0, y: 50},
     visible: {
       opacity: 1,
       y: 0,
@@ -51,15 +39,15 @@ export default function ProjectsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{opacity: 0}}
+          animate={isInView ? {opacity: 1} : {opacity: 0}}
+          transition={{duration: 0.8}}
         >
           {" "}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{opacity: 0, y: 30}}
+            animate={isInView ? {opacity: 1, y: 0} : {opacity: 0, y: 30}}
+            transition={{duration: 0.8, delay: 0.2}}
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
@@ -73,26 +61,7 @@ export default function ProjectsSection() {
               technical expertise and professional experience
             </p>
           </motion.div>
-          {isProjectsLoading && (
-            <div className="flex items-center justify-center py-20">
-              <Loader2 className="w-8 h-8 text-gray-400 animate-spin" />
-              <span className="ml-3 text-gray-400">Loading projects...</span>
-            </div>
-          )}
-          {projectsError && (
-            <div className="text-center py-20">
-              <p className="text-red-400 mb-4">
-                Failed to load projects: {projectsError}
-              </p>
-              <button
-                onClick={fetchProjects}
-                className="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors"
-              >
-                Try Again
-              </button>
-            </div>
-          )}
-          {!isProjectsLoading && !projectsError && projects.length > 0 && (
+          {projects.length > 0 && (
             <motion.div
               variants={containerVariants}
               initial="hidden"
@@ -212,29 +181,22 @@ export default function ProjectsSection() {
               ))}
             </motion.div>
           )}
-          {!isProjectsLoading && !projectsError && projects.length === 0 && (
-            <div className="text-center py-20">
-              <p className="text-gray-400 text-xl">No projects found.</p>
-            </div>
-          )}
-          {projects.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.8, delay: 1 }}
-              className="text-center mt-12"
+          <motion.div
+            initial={{opacity: 0, y: 30}}
+            animate={isInView ? {opacity: 1, y: 0} : {opacity: 0, y: 30}}
+            transition={{duration: 0.8, delay: 1}}
+            className="text-center mt-12"
+          >
+            <a
+              href="https://github.com/MdSalman2022"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gray-700 text-white font-semibold rounded-lg hover:bg-gray-600 hover:shadow-lg hover:shadow-gray-700/25 transition-all duration-300"
             >
-              <a
-                href="https://github.com/MdSalman2022"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gray-700 text-white font-semibold rounded-lg hover:bg-gray-600 hover:shadow-lg hover:shadow-gray-700/25 transition-all duration-300"
-              >
-                <Github className="w-5 h-5" />
-                View All Projects on GitHub
-              </a>
-            </motion.div>
-          )}
+              <Github className="w-5 h-5" />
+              View All Projects on GitHub
+            </a>
+          </motion.div>
         </motion.div>
       </div>
     </section>
