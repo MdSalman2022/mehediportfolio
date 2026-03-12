@@ -51,7 +51,7 @@ export default function ExperienceSection() {
     <section
       id="experience"
       ref={ref}
-      className="py-32 relative overflow-hidden"
+      className="py-16 md:py-32 relative overflow-hidden"
     >
       {/* Parallax decorative number */}
       <motion.div

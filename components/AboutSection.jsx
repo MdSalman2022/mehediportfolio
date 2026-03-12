@@ -72,7 +72,7 @@ const education = [
     degree: "Bachelor of Science in Computer Science & Engineering",
     institution: "Daffodil International University",
     location: "Dhaka, Bangladesh",
-    period: "2019 — 2023",
+    period: "2021 — 2025",
   },
 ];
 
@@ -92,7 +92,11 @@ export default function AboutSection() {
   const parallaxY = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   return (
-    <section id="about" ref={ref} className="py-32 relative overflow-hidden">
+    <section
+      id="about"
+      ref={ref}
+      className="py-16 md:py-32 relative overflow-hidden"
+    >
       {/* Parallax decorative number */}
       <motion.div
         className="absolute -right-6 md:-right-10 top-20 text-[10rem] md:text-[20rem] font-extrabold text-foreground/[0.05] dark:text-foreground/[0.02] leading-none select-none pointer-events-none"

@@ -28,13 +28,20 @@ export default function ProjectsSection({projects = []}) {
     ...Array.from(new Set(projects.map((p) => p.project_type).filter(Boolean))),
   ];
 
+  // Reverse sort to show latest projects first (assuming standard array insertion order or ID order)
+  const sortedProjects = [...projects].reverse();
+
   const filtered =
     active === "All"
-      ? projects
-      : projects.filter((p) => p.project_type === active);
+      ? sortedProjects
+      : sortedProjects.filter((p) => p.project_type === active);
 
   return (
-    <section id="projects" ref={ref} className="py-32 relative overflow-hidden">
+    <section
+      id="projects"
+      ref={ref}
+      className="py-16 md:py-32 relative overflow-hidden"
+    >
       <motion.div
         className="absolute -right-6 md:-right-10 top-20 text-[10rem] md:text-[20rem] font-extrabold text-foreground/[0.05] dark:text-foreground/[0.02] leading-none select-none pointer-events-none"
         style={{y: parallaxY}}

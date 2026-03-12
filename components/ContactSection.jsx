@@ -34,7 +34,7 @@ const contactItems = [
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="py-32 relative overflow-hidden">
+    <section id="contact" className="py-16 md:py-32 relative overflow-hidden">
       <div className="container max-w-6xl mx-auto px-4 md:px-6">
         <motion.div {...fadeUp}>
           <p className="section-label">// Contact</p>
