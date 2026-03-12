@@ -95,7 +95,7 @@ export default function AboutSection() {
     <section id="about" ref={ref} className="py-32 relative overflow-hidden">
       {/* Parallax decorative number */}
       <motion.div
-        className="absolute -right-10 top-20 text-[20rem] font-extrabold text-foreground/[0.05] dark:text-foreground/[0.02] leading-none select-none pointer-events-none"
+        className="absolute -right-6 md:-right-10 top-20 text-[10rem] md:text-[20rem] font-extrabold text-foreground/[0.05] dark:text-foreground/[0.02] leading-none select-none pointer-events-none"
         style={{y: parallaxY}}
       >
         01

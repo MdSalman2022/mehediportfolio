@@ -55,7 +55,7 @@ export default function ExperienceSection() {
     >
       {/* Parallax decorative number */}
       <motion.div
-        className="absolute -left-10 top-40 text-[20rem] font-extrabold text-foreground/[0.05] dark:text-foreground/[0.02] leading-none select-none pointer-events-none"
+        className="absolute -left-6 md:-left-10 top-40 text-[10rem] md:text-[20rem] font-extrabold text-foreground/[0.05] dark:text-foreground/[0.02] leading-none select-none pointer-events-none"
         style={{y: parallaxY}}
       >
         02
