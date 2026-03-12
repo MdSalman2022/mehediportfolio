@@ -1,13 +1,17 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { Mail, Phone, MapPin } from "lucide-react";
-import ContactInfo from "./ui/ContactInfo";
+import {motion} from "framer-motion";
+import {Mail, Phone, MapPin, ArrowUpRight} from "lucide-react";
 import ContactForm from "./ui/ContactForm";
-import Card from "./ui/Card";
 
-const contactInfo = [
+const fadeUp = {
+  initial: {opacity: 0, y: 30},
+  whileInView: {opacity: 1, y: 0},
+  viewport: {once: true, margin: "-80px"},
+  transition: {duration: 0.6},
+};
+
+const contactItems = [
   {
     icon: Mail,
     label: "Email",
@@ -29,87 +33,88 @@ const contactInfo = [
 ];
 
 export default function ContactSection() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section id="contact" className="py-20 bg-gray-800/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Contact{" "}
-              <span className="font-bold border-b-2 border-primary pb-1 text-primary">
-                Information
-              </span>
-            </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Interested in discussing job opportunities or collaboration? I'd
-              love to hear from you
-            </p>
-          </motion.div>
+    <section id="contact" className="py-32 relative overflow-hidden">
+      <div className="container max-w-6xl mx-auto px-4 md:px-6">
+        <motion.div {...fadeUp}>
+          <p className="section-label">// Contact</p>
+          <h2 className="section-heading mb-6">Get In Touch</h2>
+          <div className="structured-line w-20 mb-6" />
+          <p className="text-muted-foreground text-base max-w-lg mb-16">
+            I&apos;m currently open to new opportunities. Whether you have a
+            question, a project idea, or just want to say hi — my inbox is
+            always open.
+          </p>
+        </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="space-y-6"
-            >
-              <div>
-                <h3 className="text-2xl font-bold text-white mb-4 border-b border-primary pb-2">
-                  Let's Connect
-                </h3>
-                <p className="text-gray-400 leading-relaxed mb-6">
-                  I'm always interested in new opportunities and collaborations.
-                  Whether you have a project in mind or just want to say hello,
-                  feel free to reach out!
+        <div className="grid lg:grid-cols-2 gap-16">
+          {/* Contact info */}
+          <motion.div
+            className="space-y-4"
+            {...fadeUp}
+            transition={{duration: 0.6, delay: 0.1}}
+          >
+            {contactItems.map((item) =>
+              item.href ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="group flex items-center gap-5 p-5 border border-border hover:border-primary transition-all"
+                >
+                  <div className="p-3 border border-border group-hover:border-primary transition-colors shrink-0">
+                    <item.icon className="h-4 w-4 text-primary" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-mono text-[10px] font-medium text-muted-foreground uppercase tracking-widest">
+                      {item.label}
+                    </p>
+                    <p className="text-sm text-foreground font-semibold group-hover:text-primary transition-colors truncate">
+                      {item.value}
+                    </p>
+                  </div>
+                  <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+                </a>
+              ) : (
+                <div
+                  key={item.label}
+                  className="flex items-center gap-5 p-5 border border-border"
+                >
+                  <div className="p-3 border border-border shrink-0">
+                    <item.icon className="h-4 w-4 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-mono text-[10px] font-medium text-muted-foreground uppercase tracking-widest">
+                      {item.label}
+                    </p>
+                    <p className="text-sm text-foreground font-semibold">
+                      {item.value}
+                    </p>
+                  </div>
+                </div>
+              ),
+            )}
+
+            <div className="p-5 border border-primary/30 bg-primary/5">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                <p className="text-sm font-semibold text-primary">
+                  Open to opportunities
                 </p>
               </div>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Currently accepting full-time roles, freelance projects, and
+                interesting collaborations.
+              </p>
+            </div>
+          </motion.div>
 
-              <ContactInfo items={contactInfo} />
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={
-                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-                }
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                <Card className="p-6 bg-primary/20 border border-primary/30">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-3 h-3 bg-primary/40 rounded-full animate-pulse" />
-                    <span className="text-primary font-semibold">
-                      Available for new projects
-                    </span>
-                  </div>
-                  <p className="text-gray-400 text-sm">
-                    Currently accepting new freelance opportunities and
-                    full-time positions.
-                  </p>
-                </Card>
-              </motion.div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
+          {/* Contact form */}
+          <motion.div {...fadeUp} transition={{duration: 0.6, delay: 0.2}}>
+            <div className="border border-border p-8">
               <ContactForm />
-            </motion.div>
-          </div>
-        </motion.div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

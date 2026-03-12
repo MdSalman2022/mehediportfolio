@@ -1,26 +1,8 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import {
-  Calendar,
-  Code,
-  Server,
-  Database,
-  Cloud,
-  Award,
-  Target,
-  Zap,
-  Globe,
-  Users,
-} from "lucide-react";
-
-const stats = [
-  { icon: Calendar, label: "Professional Experience", value: "2+ Years" },
-  { icon: Code, label: "Projects Delivered", value: "15+" },
-  { icon: Server, label: "Technologies Mastered", value: "20+" },
-  { icon: Cloud, label: "Cloud Platforms", value: "AWS & Azure" },
-];
+import {motion, useScroll, useTransform} from "framer-motion";
+import {useRef} from "react";
+import {Globe, Server, Database, Cloud} from "lucide-react";
 
 const skillCategories = [
   {
@@ -29,19 +11,13 @@ const skillCategories = [
     skills: [
       "React",
       "Next.js",
+      "TypeScript",
       "JavaScript",
       "Tailwind CSS",
       "Redux",
-      "HTML5/CSS3",
+      "Zustand",
+      "Framer Motion",
     ],
-    colorClasses: {
-      bg: "bg-gray-700/50",
-      border: "border-gray-600/30",
-      text: "text-gray-300",
-      skillBg: "bg-gray-700/40",
-      skillBorder: "border-gray-600/30",
-      skillText: "text-gray-200",
-    },
   },
   {
     title: "Backend Development",
@@ -52,265 +28,197 @@ const skillCategories = [
       "Python",
       "RESTful APIs",
       "Socket.io",
-      "RBAC",
+      "Passport.js",
+      "OAuth 2.0",
     ],
-    colorClasses: {
-      bg: "bg-gray-700/50",
-      border: "border-gray-600/30",
-      text: "text-gray-300",
-      skillBg: "bg-gray-700/40",
-      skillBorder: "border-gray-600/30",
-      skillText: "text-gray-200",
-    },
   },
   {
     title: "Database & Storage",
     icon: Database,
-    skills: ["MongoDB", "PostgreSQL", "MySQL", "Firebase", "Redis", "AWS S3"],
-    colorClasses: {
-      bg: "bg-gray-700/50",
-      border: "border-gray-600/30",
-      text: "text-gray-300",
-      skillBg: "bg-gray-700/40",
-      skillBorder: "border-gray-600/30",
-      skillText: "text-gray-200",
-    },
+    skills: [
+      "MongoDB",
+      "PostgreSQL",
+      "MySQL",
+      "Firebase",
+      "Redis",
+      "AWS S3",
+      "Supabase",
+    ],
   },
   {
     title: "DevOps & Cloud",
     icon: Cloud,
-    skills: ["AWS Services", "Azure", "Docker", "CI/CD", "Git", "Vercel"],
-    colorClasses: {
-      bg: "bg-gray-700/50",
-      border: "border-gray-600/30",
-      text: "text-gray-300",
-      skillBg: "bg-gray-700/40",
-      skillBorder: "border-gray-600/30",
-      skillText: "text-gray-200",
-    },
+    skills: [
+      "AWS Services",
+      "Azure",
+      "AWS Lambda",
+      "Docker",
+      "GitHub Actions",
+      "CI/CD",
+      "Git",
+      "Vercel",
+    ],
   },
 ];
 
-const achievements = [
+const stats = [
+  {value: "02+", label: "Years of Experience"},
+  {value: "15+", label: "Projects Delivered"},
+  {value: "25+", label: "Technologies Used"},
+];
+
+const education = [
   {
-    icon: Zap,
-    title: "Performance Optimization",
-    description:
-      "Consistently deliver 70%+ improvements in application load times through code optimization and efficient architecture",
-  },
-  {
-    icon: Users,
-    title: "Real-time Features",
-    description:
-      "Architected and implemented real-time communication systems including chat, notifications, and live updates",
-  },
-  {
-    icon: Target,
-    title: "Scalable Solutions",
-    description:
-      "Built enterprise-grade applications serving thousands of users with high availability and performance",
-  },
-  {
-    icon: Award,
-    title: "Cloud Architecture",
-    description:
-      "Designed and deployed cloud-native solutions using AWS Lambda, S3, and other modern cloud services",
+    degree: "Bachelor of Science in Computer Science & Engineering",
+    institution: "Daffodil International University",
+    location: "Dhaka, Bangladesh",
+    period: "2019 — 2023",
   },
 ];
+
+const fadeUp = {
+  initial: {opacity: 0, y: 30},
+  whileInView: {opacity: 1, y: 0},
+  viewport: {once: true, margin: "-80px"},
+  transition: {duration: 0.6},
+};
 
 export default function AboutSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const {scrollYProgress} = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   return (
-    <section id="about" className="py-20 bg-gray-800/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          {" "}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              About{" "}
-              <span className="text-primary font-bold border-b-2 border-primary pb-1">
-                Me
-              </span>
-            </h2>{" "}
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Full Stack Developer passionate about building scalable web
-              applications and delivering exceptional user experiences through
-              clean, efficient code
-            </p>
-          </motion.div>{" "}
-          <div className="space-y-16">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="max-w-4xl mx-auto text-center"
-            >
-              {" "}
-              <div className="bg-gray-800/50 p-8 rounded-2xl border border-gray-700/50">
-                <p className="text-lg text-gray-300 leading-relaxed mb-6">
-                  Passionate Full Stack Developer with{" "}
-                  <span className="text-primary font-semibold">
-                    2+ years of professional experience
-                  </span>{" "}
-                  building robust web applications and scalable backend systems.
-                  Experienced in delivering{" "}
-                  <span className="text-primary font-semibold">
-                    high-performance solutions
-                  </span>{" "}
-                  that drive business growth and enhance user engagement across
-                  diverse industry verticals.
-                </p>
-                <p className="text-gray-300 leading-relaxed">
-                  Specialized in modern web technologies including{" "}
-                  <span className="text-primary">
-                    React, Next.js, and Node.js
-                  </span>
-                  , with expertise in{" "}
-                  <span className="text-primary">
-                    database design, API development
-                  </span>
-                  , and{" "}
-                  <span className="text-primary">cloud infrastructure</span>.
-                  Committed to writing maintainable code, following industry
-                  best practices, and continuously learning emerging
-                  technologies to solve complex business challenges.
-                </p>
-              </div>
-            </motion.div>
+    <section id="about" ref={ref} className="py-32 relative overflow-hidden">
+      {/* Parallax decorative number */}
+      <motion.div
+        className="absolute -right-10 top-20 text-[20rem] font-extrabold text-foreground/[0.05] dark:text-foreground/[0.02] leading-none select-none pointer-events-none"
+        style={{y: parallaxY}}
+      >
+        01
+      </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="grid grid-cols-2 lg:grid-cols-4 gap-6"
-            >
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={
-                    isInView
-                      ? { opacity: 1, scale: 1 }
-                      : { opacity: 0, scale: 0.8 }
-                  }
-                  transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                  className="p-6 bg-gray-800/50 rounded-xl border border-gray-700/50 text-center hover:bg-gray-800/70 transition-all duration-300 group"
-                >
-                  <stat.icon className="w-8 h-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                  <div className="text-2xl font-bold text-white mb-1 border-b border-primary/30 pb-2">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-gray-400">{stat.label}</div>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="space-y-8"
-            >
-              <h3 className="text-3xl font-bold text-white text-center mb-8">
-                Technical{" "}
-                <span className="text-primary font-bold border-b-2 border-primary">
-                  Expertise
-                </span>
-              </h3>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {skillCategories.map((category, index) => (
-                  <motion.div
-                    key={category.title}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={
-                      isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
-                    }
-                    transition={{ duration: 0.6, delay: 1 + index * 0.1 }}
-                    className="bg-gray-800/50 p-6 rounded-xl border border-gray-700/50 hover:bg-gray-800/70 transition-all duration-300"
-                  >
-                    <div className="flex items-center mb-4">
-                      <div
-                        className={`p-2 rounded-lg ${category.colorClasses.bg} ${category.colorClasses.border} mr-3`}
-                      >
-                        <category.icon
-                          className={`w-5 h-5 ${category.colorClasses.text}`}
-                        />
-                      </div>
-                      <h4 className="text-lg font-semibold text-white mb-2 border-b border-primary/30 pb-2">
-                        {category.title}
-                      </h4>
-                    </div>
-                    <div className="grid grid-cols-2 gap-2">
-                      {category.skills.map((skill) => (
-                        <span
-                          key={skill}
-                          className={`px-3 py-1 ${category.colorClasses.skillBg} ${category.colorClasses.skillText} rounded-md text-sm ${category.colorClasses.skillBorder} text-center`}
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-              className="space-y-8"
-            >
-              <h3 className="text-3xl font-bold text-white text-center mb-8">
-                Key{" "}
-                <span className="text-primary font-bold border-b-2 border-primary">
-                  Achievements
-                </span>
-              </h3>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {achievements.map((achievement, index) => (
-                  <motion.div
-                    key={achievement.title}
-                    initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                    animate={
-                      isInView
-                        ? { opacity: 1, x: 0 }
-                        : { opacity: 0, x: index % 2 === 0 ? -30 : 30 }
-                    }
-                    transition={{ duration: 0.6, delay: 1.4 + index * 0.1 }}
-                    className="flex items-start gap-4 p-6 bg-gray-800/50 rounded-xl border border-gray-700/50 hover:bg-gray-800/70 transition-all duration-300"
-                  >
-                    <div className="p-2 bg-primary/20 rounded-lg border border-primary/30 flex-shrink-0">
-                      <achievement.icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-2 border-b border-primary/30 pb-2">
-                        {achievement.title}
-                      </h4>
-                      <p className="text-gray-400 text-sm leading-relaxed">
-                        {achievement.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
+      <div className="container max-w-6xl mx-auto px-4 md:px-6">
+        <motion.div {...fadeUp}>
+          <p className="section-label">// About</p>
+          <h2 className="section-heading mb-6">About Me</h2>
+          <div className="structured-line w-20 mb-12" />
         </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-16">
+          {/* Left - Bio + Stats */}
+          <motion.div {...fadeUp} transition={{duration: 0.6, delay: 0.1}}>
+            <p className="text-muted-foreground leading-relaxed text-[15px] text-base mb-6">
+              I&apos;m a Full Stack Developer from{" "}
+              <span className="text-foreground font-semibold">
+                Dhaka, Bangladesh
+              </span>{" "}
+              with 2+ years of experience building web applications that scale.
+              I work at the intersection of design and engineering — turning
+              complex problems into clean, intuitive solutions.
+            </p>
+            <p className="text-muted-foreground leading-relaxed text-[15px] text-base mb-10">
+              My focus areas include{" "}
+              <span className="text-primary font-semibold">
+                React ecosystems
+              </span>
+              , cloud infrastructure on{" "}
+              <span className="text-primary font-semibold">
+                AWS &amp; Azure
+              </span>
+              , and building developer tools. I&apos;m passionate about
+              open-source, clean architecture, and shipping products that make
+              an impact.
+            </p>
+
+            {/* Stats grid */}
+            <div className="grid grid-cols-3 border border-border mb-12">
+              {stats.map((stat, i) => (
+                <div
+                  key={stat.label}
+                  className={`p-6 text-center ${
+                    i < 2 ? "border-r border-border" : ""
+                  }`}
+                >
+                  <p className="font-pixel text-3xl font-extrabold text-primary mb-1">
+                    {stat.value}
+                  </p>
+                  <p className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider leading-tight text-[10px] font-medium">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Education */}
+            <div className="space-y-6">
+              <div className="flex items-center gap-4">
+                <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase">
+                  // Education
+                </p>
+                <div className="h-px bg-border flex-1" />
+              </div>
+              {education.map((edu, i) => (
+                <div
+                  key={i}
+                  className="relative pl-6 border-l border-primary/30"
+                >
+                  <div className="absolute top-0 left-[-4.5px] w-2 h-2 rounded-full bg-primary" />
+                  <h4 className="text-foreground font-bold text-lg mb-1">
+                    {edu.degree}
+                  </h4>
+                  <p className="text-primary font-medium text-sm mb-1">
+                    {edu.institution}
+                  </p>
+                  <div className="flex justify-between items-center text-muted-foreground font-mono text-[11px] uppercase tracking-wider">
+                    <span>{edu.location}</span>
+                    <span>{edu.period}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Right - Skill cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {skillCategories.map((category, i) => (
+              <motion.div
+                key={category.title}
+                className="relative group overflow-hidden border border-border bg-card/10 p-6 transition-all duration-300 hover:border-primary/50"
+                initial={{opacity: 0, y: 20}}
+                whileInView={{opacity: 1, y: 0}}
+                viewport={{once: true}}
+                transition={{duration: 0.5, delay: i * 0.1}}
+              >
+                {/* Hover glow effect */}
+                <div className="absolute -top-12 -right-12 w-24 h-24 rounded-full bg-primary/5 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="p-2.5 bg-primary/10 text-primary border border-primary/20">
+                    <category.icon className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-pixel text-sm font-bold text-foreground group-hover:text-primary transition-colors">
+                    {category.title}
+                  </h3>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {category.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-3 py-1.5 text-[11px] font-mono font-bold border border-primary/20 bg-primary/5 text-foreground transition-all duration-300 hover:border-primary hover:text-primary-foreground hover:bg-primary group-hover:border-primary/30"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

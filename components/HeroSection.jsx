@@ -1,192 +1,217 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useState } from "react";
+import {motion, useScroll, useTransform} from "framer-motion";
+import {useRef} from "react";
 import {
   ArrowDown,
+  ArrowRight,
   Download,
-  Code,
-  Server,
-  Cloud,
-  Database,
+  Github,
+  Linkedin,
+  Mail,
 } from "lucide-react";
-import { smoothScrollTo } from "@/lib/utils";
+import {smoothScrollTo} from "@/lib/utils";
 
-const skills = [
+const socialLinks = [
+  {icon: Github, href: "https://github.com/MdSalman2022", label: "GitHub"},
   {
-    icon: Code,
-    label: "Frontend",
-    description: "React, Next.js, Tailwind, Bootstrap, JavaScript",
+    icon: Linkedin,
+    href: "https://www.linkedin.com/in/mehedihasan-salman/",
+    label: "LinkedIn",
   },
-  {
-    icon: Server,
-    label: "Backend",
-    description: "Node.js, Express, Python, REST APIs",
-  },
-  {
-    icon: Database,
-    label: "Databases",
-    description: "MongoDB, PostgreSQL, MySQL, Firebase",
-  },
-  { icon: Cloud, label: "DevOps", description: "AWS, Azure, CI/CD, GitHub" },
+  {icon: Mail, href: "mailto:mehedi.salman102@gmail.com", label: "Email"},
 ];
 
 export default function HeroSection() {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const ref = useRef(null);
+  const {scrollYProgress} = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
 
-  const handleMouseLeave = () => {
-    setHoveredIndex(null);
-  };
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      ref={ref}
+      className="min-h-screen flex items-center pt-16 relative overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gray-900">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.05),transparent_50%)]" />
-        </div>
-      </div>
+      {/* Grid overlay */}
+      <div className="absolute inset-0 grid-overlay pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="space-y-8 mt-20 md:mt-0"
-        >
-          <div className="space-y-4">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-bold text-white"
-            >
-              Hi, I'm{" "}
-              <span className="text-primary font-extrabold">Mehedi</span>
-            </motion.h1>{" "}
+      {/* Marquee — large pixel text at bottom */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 overflow-hidden pointer-events-none"
+        style={{y: y2}}
+      >
+        <div className="marquee-text animate-marquee">
+          REACT · NEXT.JS · NODE.JS · MONGODB · AWS · AZURE · DEVOPS · FULL
+          STACK ·&nbsp;
+        </div>
+      </motion.div>
+
+      <motion.div
+        className="container max-w-6xl mx-auto px-4 md:px-6 py-20 relative z-10"
+        style={{y: y1, opacity}}
+      >
+        <div className="grid lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-8">
+            {/* Label */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-xl md:text-2xl lg:text-3xl text-gray-300"
+              className="flex items-center gap-3 mb-8"
+              initial={{opacity: 0, x: -20}}
+              animate={{opacity: 1, x: 0}}
+              transition={{duration: 0.5}}
             >
-              <span className="block">Full Stack Developer</span>
-              <span className="text-primary font-semibold">
-                Specialized in Web & Cloud Solutions
+              <div className="w-12 h-px bg-primary" />
+              <span className="font-mono text-xs text-primary tracking-[0.3em] uppercase">
+                Full Stack Developer
               </span>
             </motion.div>
-          </div>{" "}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="max-w-3xl mx-auto text-lg md:text-xl text-gray-400 leading-relaxed"
-          >
-            Experienced Full Stack Developer with 2+ years in professional
-            software development, specializing in scalable web applications, API
-            development, and cloud solutions. Passionate about delivering
-            optimized, secure, and maintainable code that drives business
-            success and exceptional user experiences.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto mt-12 perspective"
-            style={{ perspective: "1000px" }}
-          >
-            {skills.map((skill, index) => (
-              <motion.div
-                key={skill.label}
-                initial={{
-                  opacity: 0,
-                  y: 30,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 30,
-                  delay: index * 0.1,
-                }}
-                className="p-6 bg-gray-800/50 rounded-xl border border-gray-700/50 backdrop-blur-sm hover:border-primary hover:shadow-lg hover:shadow-primary/50 transition-all duration-300 cursor-pointer"
-              >
-                <motion.div>
-                  <motion.div
-                    animate={
-                      hoveredIndex === index
-                        ? { scale: 1.2, y: -5 }
-                        : { scale: 1, y: 0 }
-                    }
-                    transition={{ duration: 0.3 }}
-                  >
-                    <skill.icon className="w-8 h-8 text-primary mx-auto mb-3" />
-                  </motion.div>
 
-                  <h3 className="text-white font-semibold mb-2 border-b border-primary/30 pb-2 hover:border-primary transition-colors">
-                    {skill.label}
-                  </h3>
+            {/* Name */}
+            <motion.h1
+              className="text-6xl md:text-7xl lg:text-8xl font-extrabold leading-[0.9] tracking-tight mb-8 font-pixel"
+              initial={{opacity: 0, y: 40}}
+              animate={{opacity: 1, y: 0}}
+              transition={{duration: 0.7, delay: 0.1}}
+            >
+              <span className="text-foreground">Mehedi</span>
+              <br />
+              <span className="text-foreground">Hasan</span>
+              <br />
+              <span className="text-primary">Salman</span>
+            </motion.h1>
 
-                  <motion.p
-                    initial={{ opacity: 0.6, color: "#9CA3AF" }}
-                    animate={
-                      hoveredIndex === index
-                        ? { opacity: 1, color: "#E5E7EB" }
-                        : { opacity: 0.6, color: "#9CA3AF" }
-                    }
-                    transition={{ duration: 0.3 }}
-                    className="text-sm"
-                  >
-                    {skill.description}
-                  </motion.p>
+            <motion.p
+              className="text-muted-foreground text-lg md:text-xl max-w-lg mb-8 leading-relaxed"
+              initial={{opacity: 0, y: 20}}
+              animate={{opacity: 1, y: 0}}
+              transition={{duration: 0.5, delay: 0.3}}
+            >
+              I build scalable web applications and cloud solutions. Focused on
+              clean architecture, performance, and shipping products that
+              matter.
+            </motion.p>
+
+            {/* Highlights */}
+            <motion.div
+              className="mb-10 border-l-2 border-primary/30 pl-6 space-y-3"
+              initial={{opacity: 0}}
+              animate={{opacity: 1}}
+              transition={{delay: 0.5}}
+            >
+              {[
+                "Full-stack apps with React, Node.js & Cloud",
+                "DevOps & CI/CD on AWS and Azure",
+                "Clean, maintainable, and testable code",
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  className="flex items-center gap-3 text-sm text-muted-foreground"
+                  initial={{opacity: 0, x: -15}}
+                  animate={{opacity: 1, x: 0}}
+                  transition={{delay: 0.6 + i * 0.1}}
+                >
+                  <ArrowRight className="h-3 w-3 text-primary shrink-0" />
+                  <span className="font-mono text-xs">{item}</span>
                 </motion.div>
-              </motion.div>
-            ))}
-          </motion.div>
+              ))}
+            </motion.div>
+
+            {/* CTAs */}
+            <motion.div
+              className="flex flex-wrap gap-4"
+              initial={{opacity: 0, y: 20}}
+              animate={{opacity: 1, y: 0}}
+              transition={{delay: 0.8}}
+            >
+              <button
+                onClick={() => smoothScrollTo("projects")}
+                className="px-8 py-3 bg-primary text-primary-foreground font-semibold tracking-wide uppercase text-sm hover:bg-primary/90 transition-colors cursor-pointer"
+              >
+                View Work
+              </button>
+              <button
+                onClick={() => smoothScrollTo("contact")}
+                className="flex items-center gap-2 px-8 py-3 border border-border text-foreground font-semibold tracking-wide uppercase text-sm hover:border-primary hover:text-primary transition-colors cursor-pointer"
+              >
+                Contact
+              </button>
+              <a
+                href="/Mehedi-Hasan-Salman-Full-stack-web-developer.pdf"
+                download
+                className="flex items-center gap-2 px-8 py-3 border border-border text-foreground font-semibold tracking-wide uppercase text-sm hover:border-primary hover:text-primary transition-colors"
+              >
+                <Download className="h-4 w-4" />
+                Download CV
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Right side - social + info */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12"
+            className="lg:col-span-4 flex flex-col items-start lg:items-end gap-8"
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            transition={{delay: 1}}
           >
-            {" "}
-            <button
-              onClick={() => smoothScrollTo("projects")}
-              className="group relative px-8 py-4 bg-primary text-white font-semibold rounded-lg overflow-hidden hover:bg-primary/90 transition-all duration-300 border border-primary shadow-lg shadow-primary/30 cursor-pointer"
-            >
-              <span className="relative z-10">View My Work</span>
-            </button>
-            <a
-              href="/Mehedi-hasan-salman-full-stack-developer.pdf"
-              download
-              className="group flex items-center gap-2 px-8 py-4 bg-transparent border border-gray-600 text-gray-300 font-semibold rounded-lg hover:bg-gray-800 hover:border-gray-500 transition-all duration-300 cursor-pointer"
-            >
-              <Download className="w-4 h-4" />
-              Download Full CV
-            </a>
+            <div className="flex lg:flex-col gap-3">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target={link.href.startsWith("mailto") ? undefined : "_blank"}
+                  rel="noopener noreferrer"
+                  className="p-3 border border-border hover:border-primary hover:text-primary text-muted-foreground transition-all"
+                  aria-label={link.label}
+                >
+                  <link.icon className="h-4 w-4" />
+                </a>
+              ))}
+            </div>
+
+            <div className="hidden lg:block text-right space-y-1">
+              <p className="font-mono text-xs text-muted-foreground">
+                Based in
+              </p>
+              <p className="text-sm font-semibold text-foreground">
+                Dhaka, Bangladesh
+              </p>
+            </div>
+
+            <div className="hidden lg:flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <span className="font-mono text-xs text-primary">
+                Available for work
+              </span>
+            </div>
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.5 }}
-            className="absolute -bottom-10 left-1/2 transform -translate-x-1/2"
+        </div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          className="flex justify-center mt-20"
+          initial={{opacity: 0}}
+          animate={{opacity: 1}}
+          transition={{delay: 1.2}}
+        >
+          <button
+            onClick={() => smoothScrollTo("about")}
+            className="text-muted-foreground hover:text-primary transition-colors"
           >
-            <motion.button
-              onClick={() => smoothScrollTo("about")}
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="p-2 text-gray-400 hover:text-white transition-colors cursor-pointer"
+            <motion.div
+              animate={{y: [0, 8, 0]}}
+              transition={{repeat: Infinity, duration: 2, ease: "easeInOut"}}
             >
-              <ArrowDown className="w-6 h-6" />
-            </motion.button>
-          </motion.div>
+              <ArrowDown className="h-5 w-5" />
+            </motion.div>
+          </button>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

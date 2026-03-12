@@ -1,7 +1,7 @@
 "use client";
 
-import { forwardRef } from "react";
-import { motion } from "framer-motion";
+import {forwardRef} from "react";
+import {Loader2} from "lucide-react";
 
 const Button = forwardRef(
   (
@@ -15,83 +15,46 @@ const Button = forwardRef(
       className = "",
       onClick,
       type = "button",
-      as = "button",
       ...props
     },
-    ref
+    ref,
   ) => {
     const baseClasses =
-      "inline-flex items-center justify-center gap-2 font-semibold rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900";
+      "inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200 focus:outline-none tracking-wide uppercase text-xs";
 
     const variants = {
-      primary:
-        "bg-gray-700 text-white hover:bg-gray-600 hover:shadow-lg hover:shadow-gray-700/25 focus:ring-gray-600",
+      primary: "bg-primary text-primary-foreground hover:bg-primary/90",
       secondary:
-        "bg-transparent border border-gray-600 text-gray-300 hover:bg-gray-800 hover:border-gray-500 focus:ring-gray-500",
+        "border border-border text-foreground hover:border-primary hover:text-primary",
       outline:
-        "bg-transparent border-2 border-gray-600 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-gray-500",
-      ghost:
-        "bg-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 focus:ring-gray-500",
+        "border border-border text-muted-foreground hover:border-primary hover:text-primary",
+      ghost: "text-muted-foreground hover:text-primary",
     };
 
     const sizes = {
-      sm: "px-4 py-2 text-sm",
-      md: "px-6 py-3 text-base",
-      lg: "px-8 py-4 text-lg",
+      sm: "px-5 py-2",
+      md: "px-6 py-3",
+      lg: "px-8 py-4",
     };
 
     const disabledClasses = "opacity-50 cursor-not-allowed pointer-events-none";
 
-    const buttonClasses = `
-    ${baseClasses}
-    ${variants[variant]}
-    ${sizes[size]}
-    ${disabled || loading ? disabledClasses : ""}
-    ${className}
-  `.trim();
-
-    const LoadingSpinner = () => (
-      <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-    );
-
-    const buttonContent = (
-      <>
-        {loading && <LoadingSpinner />}
-        {!loading && icon && icon}
+    return (
+      <button
+        ref={ref}
+        type={type}
+        disabled={disabled || loading}
+        onClick={onClick}
+        className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${
+          disabled || loading ? disabledClasses : ""
+        } ${className}`}
+        {...props}
+      >
+        {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : icon}
         {children}
-      </>
+      </button>
     );
-
-    const Component = as;
-    const elementProps = {
-      ref,
-      className: buttonClasses,
-      disabled: disabled || loading,
-      ...props,
-    };
-
-    if (as === "button") {
-      elementProps.type = type;
-      elementProps.onClick = onClick;
-    }
-
-    if (variant === "primary" && !disabled && !loading && as === "button") {
-      return (
-        <motion.button
-          {...elementProps}
-          whileHover={{ y: -2 }}
-          whileTap={{ y: 0 }}
-        >
-          <span className="relative z-10 flex items-center gap-3 cursor-pointer">
-            {buttonContent}
-          </span>
-          <div className="absolute inset-0 bg-gray-600 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-lg" />
-        </motion.button>
-      );
-    }
-
-    return <Component {...elementProps}>{buttonContent}</Component>;
-  }
+  },
 );
 
 Button.displayName = "Button";

@@ -1,63 +1,155 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { X, ExternalLink, Github } from "lucide-react";
-import { usePortfolioStore } from "@/store/portfolioStore";
-import { cn } from "@/lib/utils";
+import {useState} from "react";
+import {motion, AnimatePresence} from "framer-motion";
+import {X, ExternalLink, Github, ArrowLeft, ArrowRight} from "lucide-react";
+import {usePortfolioStore} from "@/store/portfolioStore";
 
 export default function ProjectModal() {
-  const { selectedProject, isProjectModalOpen, closeProjectModal } =
+  const {selectedProject, isProjectModalOpen, closeProjectModal} =
     usePortfolioStore();
+  const [imgIndex, setImgIndex] = useState(0);
 
+  // Reset image index when project changes
   if (!selectedProject) return null;
 
+  const images = selectedProject.img ?? [];
+  const hasManyImages = images.length > 1;
+
+  const prev = (e) => {
+    e.stopPropagation();
+    setImgIndex((i) => (i - 1 + images.length) % images.length);
+  };
+  const next = (e) => {
+    e.stopPropagation();
+    setImgIndex((i) => (i + 1) % images.length);
+  };
+
   return (
-    <AnimatePresence>
+    <AnimatePresence onExitComplete={() => setImgIndex(0)}>
       {isProjectModalOpen && (
+        /* Backdrop */
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+          key="backdrop"
+          initial={{opacity: 0}}
+          animate={{opacity: 1}}
+          exit={{opacity: 0}}
+          transition={{duration: 0.2}}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-background/80 backdrop-blur-sm"
           onClick={closeProjectModal}
         >
+          {/* Panel */}
           <motion.div
-            initial={{ scale: 0.9, opacity: 0, y: 50 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 50 }}
-            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-gray-900 rounded-2xl shadow-2xl"
+            key="panel"
+            initial={{opacity: 0, y: 24}}
+            animate={{opacity: 1, y: 0}}
+            exit={{opacity: 0, y: 24}}
+            transition={{duration: 0.25, ease: "easeOut"}}
+            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-card border border-border flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              onClick={closeProjectModal}
-              className="absolute top-4 right-4 z-10 p-2 bg-gray-800/80 rounded-full hover:bg-gray-700 transition-colors"
-            >
-              <X className="w-5 h-5 text-white" />
-            </button>
-
-            <div className="relative h-64 md:h-80 overflow-hidden rounded-t-2xl">
-              <img
-                src={selectedProject.img[0]}
-                alt={selectedProject.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
+            {/* Header bar */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-border shrink-0">
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-xs text-primary/60 tracking-widest">
+                  PROJECT
+                </span>
+                <div className="w-px h-4 bg-border" />
+                <span className="font-mono text-xs text-muted-foreground tracking-widest uppercase">
+                  {selectedProject.project_type ?? "work"}
+                </span>
+              </div>
+              <button
+                onClick={closeProjectModal}
+                className="p-1.5 text-muted-foreground hover:text-primary border border-transparent hover:border-border transition-all"
+                aria-label="Close"
+              >
+                <X className="w-4 h-4" />
+              </button>
             </div>
 
-            <div className="p-6 md:p-8">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 md:mb-0">
-                  {selectedProject.title}
-                </h2>
-                <div className="flex gap-3">
+            {/* Image viewer */}
+            {images.length > 0 && (
+              <div className="relative aspect-video overflow-hidden bg-muted shrink-0">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={imgIndex}
+                    src={images[imgIndex]}
+                    alt={`${selectedProject.title} screenshot ${imgIndex + 1}`}
+                    initial={{opacity: 0}}
+                    animate={{opacity: 1}}
+                    exit={{opacity: 0}}
+                    transition={{duration: 0.2}}
+                    className="w-full h-full object-cover"
+                  />
+                </AnimatePresence>
+
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-card/60 via-transparent to-transparent pointer-events-none" />
+
+                {/* Prev / Next */}
+                {hasManyImages && (
+                  <>
+                    <button
+                      onClick={prev}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 p-2 bg-background/70 border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all backdrop-blur-sm"
+                      aria-label="Previous image"
+                    >
+                      <ArrowLeft className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={next}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-background/70 border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all backdrop-blur-sm"
+                      aria-label="Next image"
+                    >
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                    {/* Dot indicators */}
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+                      {images.map((_, i) => (
+                        <button
+                          key={i}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setImgIndex(i);
+                          }}
+                          className={`w-1.5 h-1.5 transition-all ${
+                            i === imgIndex
+                              ? "bg-primary w-4"
+                              : "bg-foreground/30 hover:bg-foreground/60"
+                          }`}
+                          aria-label={`Image ${i + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
+
+            {/* Content */}
+            <div className="p-6 md:p-8 space-y-8">
+              {/* Title + CTAs */}
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div>
+                  <h2 className="font-pixel text-2xl md:text-3xl font-bold text-foreground leading-tight mb-1">
+                    {selectedProject.title}
+                  </h2>
+                  {selectedProject.project_type && (
+                    <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase">
+                      {selectedProject.project_type}
+                    </p>
+                  )}
+                </div>
+                <div className="flex gap-3 shrink-0">
                   {selectedProject.sitelink && (
                     <a
                       href={selectedProject.sitelink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground font-mono text-xs uppercase tracking-widest hover:bg-primary/90 transition-colors"
                     >
-                      <ExternalLink className="w-4 h-4" />
+                      <ExternalLink className="w-3.5 h-3.5" />
                       Live Site
                     </a>
                   )}
@@ -66,62 +158,73 @@ export default function ProjectModal() {
                       href={selectedProject.codelink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 border border-border text-muted-foreground font-mono text-xs uppercase tracking-widest hover:border-primary hover:text-primary transition-all"
                     >
-                      <Github className="w-4 h-4" />
+                      <Github className="w-3.5 h-3.5" />
                       Code
                     </a>
                   )}
                 </div>
               </div>
 
-              <div className="mb-6">
-                <h3 className="text-xl font-semibold text-white mb-3">
-                  Technologies Used
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {selectedProject.technologies.map((tech, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm border border-primary/30"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              {/* Divider */}
+              <div className="h-px bg-border" />
 
-              <div className="mb-6">
-                <h3 className="text-xl font-semibold text-white mb-3">
-                  About the Project
-                </h3>
-                <p className="text-gray-300 leading-relaxed">
+              {/* About */}
+              <div>
+                <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-3">
+                  // About
+                </p>
+                <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
                   {selectedProject.desc}
                 </p>
               </div>
 
-              {selectedProject.img.length > 1 && (
+              {/* Tech stack */}
+              {selectedProject.technologies?.length > 0 && (
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-4">
-                    Project Gallery
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {selectedProject.img.slice(1).map((image, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        className="relative aspect-video overflow-hidden rounded-lg"
+                  <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4">
+                    // Stack
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedProject.technologies.map((tech, i) => (
+                      <span
+                        key={i}
+                        className="px-3 py-1 text-xs font-mono font-medium border border-border text-muted-foreground hover:border-primary hover:text-primary transition-colors"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Gallery thumbnails */}
+              {hasManyImages && (
+                <div>
+                  <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4">
+                    // Gallery
+                  </p>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                    {images.map((img, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setImgIndex(i)}
+                        className={`relative aspect-video overflow-hidden border transition-all ${
+                          i === imgIndex
+                            ? "border-primary"
+                            : "border-border hover:border-border/80"
+                        }`}
                       >
                         <img
-                          src={image}
-                          alt={`${selectedProject.title} screenshot ${
-                            index + 2
-                          }`}
-                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                          src={img}
+                          alt={`${selectedProject.title} ${i + 1}`}
+                          className="w-full h-full object-cover"
                         />
-                      </motion.div>
+                        {i === imgIndex && (
+                          <div className="absolute inset-0 bg-primary/10" />
+                        )}
+                      </button>
                     ))}
                   </div>
                 </div>

@@ -1,10 +1,19 @@
-import { Inter } from "next/font/google";
+import {Syne, IBM_Plex_Mono} from "next/font/google";
 import "./globals.css";
+import ThemeProvider from "@/components/ThemeProvider";
 
-const inter = Inter({
-  variable: "--font-inter",
+const syne = Syne({
+  variable: "--font-syne",
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  variable: "--font-ibm-plex-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
 });
 
 export const metadata = {
@@ -13,7 +22,7 @@ export const metadata = {
     "Passionate full-stack developer specializing in React, Node.js, and MongoDB. Creating beautiful, functional web experiences with modern technologies.",
   keywords:
     "frontend developer, react developer, full stack developer, MERN stack, web development, portfolio",
-  authors: [{ name: "Mehedi" }],
+  authors: [{name: "Mehedi"}],
   creator: "Mehedi",
   openGraph: {
     title: "Mehedi - Full Stack Web Developer",
@@ -52,13 +61,19 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({children}) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} antialiased bg-gray-900 text-white font-sans`}
+        className={`${syne.variable} ${ibmPlexMono.variable} antialiased font-sans`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

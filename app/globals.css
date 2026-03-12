@@ -1,76 +1,181 @@
 @import "tailwindcss";
 
-@theme {
-  --color-primary: #06b6d4;
-  --color-primary-50: rgb(240, 253, 250);
-  --color-primary-100: rgb(204, 250, 245);
-  --color-primary-200: rgb(153, 246, 229);
-  --color-primary-300: rgb(34, 211, 238);
-  --color-primary-400: rgb(6, 182, 212);
-  --color-primary-500: rgb(6, 177, 204);
-  --color-primary-600: rgb(8, 145, 178);
-  --color-primary-700: rgb(14, 116, 144);
-  --color-primary-800: rgb(21, 94, 111);
-  --color-primary-900: rgb(19, 78, 102);
+/* ─── Pixel font ─── */
+@font-face {
+  font-family: "GeistPixelCircle";
+  src: url("/GeistPixel-Circle.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
 }
 
+/* ─── Class-based dark mode for next-themes ─── */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─── Theme tokens — color utilities reference these CSS vars at runtime ─── */
+@theme inline {
+  --font-sans: var(--font-syne), system-ui, sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  --font-pixel: "GeistPixelCircle", ui-monospace, monospace;
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+}
+
+/* ─── Raw HSL channel values — swapped by .dark class ─── */
 @layer base {
   :root {
-    color-scheme: dark;
+    --background: 150 20% 98%;
+    --foreground: 222 22% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 22% 14%;
+    --primary: 155 70% 40%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 150 22% 94%;
+    --secondary-foreground: 222 22% 14%;
+    --muted: 160 18% 95%;
+    --muted-foreground: 220 10% 25%;
+    --accent: 154 40% 92%;
+    --accent-foreground: 158 64% 30%;
+    --border: 160 16% 87%;
+    --input: 160 16% 87%;
+    --ring: 155 60% 52%;
+  }
+
+  .dark {
+    --background: 155 40% 6%;
+    --foreground: 156 18% 90%;
+    --card: 155 30% 9%;
+    --card-foreground: 156 18% 90%;
+    --primary: 155 60% 52%;
+    --primary-foreground: 222 47% 11%;
+    --secondary: 220 32% 18%;
+    --secondary-foreground: 156 18% 90%;
+    --muted: 220 30% 17%;
+    --muted-foreground: 156 10% 70%;
+    --accent: 220 28% 18%;
+    --accent-foreground: 155 60% 60%;
+    --border: 155 20% 16%;
+    --input: 220 24% 22%;
+    --ring: 155 60% 52%;
   }
 
   * {
-    scroll-behavior: smooth;
+    box-sizing: border-box;
+    border-color: hsl(var(--border));
   }
 
-  html {
-    font-family:
-      var(--font-inter),
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      "Roboto",
-      sans-serif;
+  button,
+  a {
+    cursor: pointer;
   }
 
   body {
-    background: #0f0f1e;
-    color: #ffffff;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   ::-webkit-scrollbar {
     width: 8px;
   }
-
   ::-webkit-scrollbar-track {
-    background: #0f0f1e;
+    background: hsl(var(--background));
   }
-
   ::-webkit-scrollbar-thumb {
-    background: #2d2d44;
+    background: hsl(var(--border));
     border-radius: 4px;
   }
-
   ::-webkit-scrollbar-thumb:hover {
-    background: #404052;
+    background: hsl(var(--muted-foreground));
   }
 }
 
 @layer utilities {
-  .text-primary {
-    @apply text-[var(--color-primary)];
+  .font-pixel {
+    font-family: "GeistPixelCircle", ui-monospace, monospace;
   }
 
-  .bg-primary {
-    @apply bg-[var(--color-primary)];
+  .section-heading {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: hsl(var(--foreground));
+    line-height: 1.1;
+    font-family: "GeistPixelCircle", ui-monospace, monospace;
   }
 
-  .border-primary {
-    @apply border-[var(--color-primary)];
+  .section-label {
+    font-size: 0.75rem;
+    color: hsl(var(--primary));
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    font-family: var(--font-mono);
   }
 
-  .shadow-primary {
-    @apply shadow-lg;
-    box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
+  .structured-line {
+    height: 1px;
+    background-color: hsl(var(--border));
   }
+
+  .grid-overlay {
+    background-image:
+      linear-gradient(
+        color-mix(in srgb, hsl(var(--border)) 50%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        color-mix(in srgb, hsl(var(--border)) 50%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 60px 60px;
+  }
+
+  .marquee-text {
+    font-family: "GeistPixelCircle", ui-monospace, monospace;
+    font-size: clamp(5rem, 12vw, 12rem);
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap;
+    color: color-mix(in srgb, hsl(var(--foreground)) 4%, transparent);
+    user-select: none;
+    display: inline-block;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+  white-space: nowrap;
+  display: inline-block;
 }

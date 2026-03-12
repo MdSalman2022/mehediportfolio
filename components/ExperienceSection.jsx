@@ -1,150 +1,141 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import {
-  Building,
-  Briefcase,
-  Calendar,
-  ChevronRight,
-  MapPin,
-} from "lucide-react";
+import {motion, useScroll, useTransform} from "framer-motion";
+import {useRef} from "react";
+import {MapPin, ExternalLink} from "lucide-react";
 
-const experience = [
+const experiences = [
   {
-    position: "Full Stack Web Developer",
+    role: "Full Stack Web Developer",
     company: "Gruham.ai",
+    companyUrl: "#",
     location: "Remote (Hyderabad, India)",
-    period: "May 2023 – Present",
+    period: "May 2023 — Present",
+    number: "01",
     responsibilities: [
-      "Pioneered the integration of a chat feature, enhancing homeowner and designer real-time communication, thereby boosting user engagement",
-      "Engineered front end optimizations, achieving a 75% reduction in initial load times and a 50% decrease in unnecessary code, enhancing overall performance and user experience significantly",
-      "Proficiently integrated Firebase push notifications, enhancing user engagement and delivering timely updates",
-      "Engineered live stream functionality for interactive events and seamless event broadcasting",
-      "Worked on reels feature to enhance user engagement by showcasing short and engaging video content",
-      "Developed real-time activity feeds, enriching user interactions and keeping them informed",
-      "Utilized Express.js for backend development, enabling efficient server-side operations and smooth data handling with MongoDB and PostgreSQL as the databases",
-      "Collaborated with a team to design and develop a user-friendly, modern React frontend",
-      "Implemented AWS Lambda functions for image optimization, improving load times and user experience",
+      "Built real-time communication features (chat, reels, live streaming) to enhance user engagement and facilitate seamless interaction between homeowners and designers.",
+      "Engineered frontend optimizations, reducing initial load times by 75% and significantly improving the user experience.",
+      "Developed and maintained backend services using Express.js, MongoDB, and Supabase, ensuring efficient data flow and reliable system performance, and CI/CD automation with GitHub Actions.",
+      "Implemented scalable architecture with reverse proxy routing and optimized data fetching using RTK Query and the Context API, enhancing app performance and routing efficiency.",
     ],
-    technologies: [
+    tech: [
       "React",
       "Next.js",
       "Node.js",
       "Express",
       "MongoDB",
-      "PostgreSQL",
-      "Firebase",
-      "AWS Lambda",
+      "Supabase",
+      "RTK Query",
+      "GitHub Actions",
       "Socket.io",
     ],
   },
 ];
 
+const fadeUp = {
+  initial: {opacity: 0, y: 30},
+  whileInView: {opacity: 1, y: 0},
+  viewport: {once: true, margin: "-80px"},
+  transition: {duration: 0.6},
+};
+
 export default function ExperienceSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const {scrollYProgress} = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   return (
-    <section id="experience" className="py-20 bg-gray-800/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Professional{" "}
-              <span className="text-primary font-bold border-b-2 border-primary">
-                Experience
-              </span>
-            </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              My journey as a Full Stack Developer with a focus on enterprise
-              solutions
-            </p>
-          </motion.div>
+    <section
+      id="experience"
+      ref={ref}
+      className="py-32 relative overflow-hidden"
+    >
+      {/* Parallax decorative number */}
+      <motion.div
+        className="absolute -left-10 top-40 text-[20rem] font-extrabold text-foreground/[0.05] dark:text-foreground/[0.02] leading-none select-none pointer-events-none"
+        style={{y: parallaxY}}
+      >
+        02
+      </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="max-w-4xl mx-auto"
-          >
-            {experience.map((job, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={
-                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
-                }
-                transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-                className="relative pl-8 mb-12 border-l-2 border-primary/30 pb-8"
-              >
-                <div className="absolute -left-3 top-0 w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-                  <Building className="w-3 h-3 text-white" />
-                </div>
-
-                <div className="bg-gray-800/80 p-6 rounded-xl border border-gray-700 backdrop-blur-sm">
-                  <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
-                    <div>
-                      <h3 className="text-2xl font-bold text-white border-b border-primary/30 pb-2 mb-2">
-                        {job.position}
-                      </h3>
-                      <div className="flex items-center mt-2 text-gray-300">
-                        <Briefcase className="w-4 h-4 mr-2 text-primary" />
-                        <span className="mr-3">{job.company}</span>
-                        <MapPin className="w-4 h-4 mr-2 text-primary" />
-                        <span>{job.location}</span>
-                      </div>
-                    </div>
-                    <div className="mt-2 md:mt-0 flex items-center px-4 py-2 bg-primary/20 text-primary rounded-full text-sm">
-                      <Calendar className="w-4 h-4 mr-2" />
-                      {job.period}
-                    </div>
-                  </div>
-
-                  <div className="mt-4">
-                    <h4 className="text-lg font-semibold text-white mb-3 border-b border-primary/30 pb-2">
-                      Key Responsibilities
-                    </h4>
-                    <ul className="space-y-3">
-                      {job.responsibilities.map((item, i) => (
-                        <li key={i} className="flex">
-                          <ChevronRight className="w-5 h-5 text-primary mr-2 flex-shrink-0 mt-1" />
-                          <p className="text-gray-300">{item}</p>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="mt-6">
-                    <h4 className="text-lg font-semibold text-white mb-3 border-b border-primary/30 pb-2">
-                      Technologies Used
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {job.technologies.map((tech, i) => (
-                        <span
-                          key={i}
-                          className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm border border-primary/30"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+      <div className="container max-w-6xl mx-auto px-4 md:px-6">
+        <motion.div {...fadeUp}>
+          <p className="section-label">// Experience</p>
+          <h2 className="section-heading mb-6">Where I&apos;ve Worked</h2>
+          <div className="structured-line w-20 mb-16" />
         </motion.div>
+
+        <div className="space-y-0">
+          {experiences.map((exp, i) => (
+            <motion.div
+              key={i}
+              className="group border-t border-border py-10 md:py-14"
+              {...fadeUp}
+              transition={{duration: 0.6, delay: i * 0.15}}
+            >
+              <div className="grid md:grid-cols-12 gap-6 md:gap-10">
+                {/* Number + period */}
+                <div className="md:col-span-3 flex md:flex-col gap-4 md:gap-2">
+                  <span className="font-pixel text-5xl font-extrabold text-primary/30 dark:text-primary/20 group-hover:text-primary/60 dark:group-hover:text-primary/40 transition-colors">
+                    {exp.number}
+                  </span>
+                  <div>
+                    <p className="font-mono text-xs text-muted-foreground">
+                      {exp.period}
+                    </p>
+                    <p className="flex items-center gap-1 text-xs text-muted-foreground mt-1">
+                      <MapPin className="h-3 w-3" />
+                      {exp.location}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Details */}
+                <div className="md:col-span-9">
+                  <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors mb-1">
+                    {exp.role}
+                  </h3>
+                  <a
+                    href={exp.companyUrl}
+                    className="inline-flex items-center gap-1.5 text-primary font-medium text-sm hover:underline mb-6"
+                  >
+                    {exp.company}
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+
+                  <ul className="space-y-4 mb-8">
+                    {exp.responsibilities.map((item, j) => (
+                      <li
+                        key={j}
+                        className="text-[15px] text-foreground/90 dark:text-muted-foreground leading-relaxed flex gap-4"
+                      >
+                        <span className="text-primary mt-1.5 shrink-0 font-mono text-[10px] font-bold">
+                          →
+                        </span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="flex flex-wrap gap-2">
+                    {exp.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="px-3 py-1.5 text-[11px] font-mono font-bold border border-primary/20 bg-primary/5 text-foreground transition-all duration-300 hover:border-primary hover:text-primary-foreground hover:bg-primary shadow-sm"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+          <div className="border-t border-border" />
+        </div>
       </div>
     </section>
   );

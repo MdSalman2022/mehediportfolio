@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUp } from "lucide-react";
-import { smoothScrollTo } from "@/lib/utils";
+import {useState, useEffect} from "react";
+import {motion, AnimatePresence} from "framer-motion";
+import {ArrowUp} from "lucide-react";
+import {smoothScrollTo} from "@/lib/utils";
 
 export default function BackToTop() {
   const [isVisible, setIsVisible] = useState(false);
@@ -25,13 +25,13 @@ export default function BackToTop() {
     <AnimatePresence>
       {isVisible && (
         <motion.button
-          initial={{ opacity: 0, scale: 0.8, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.8, y: 20 }}
-          whileHover={{ scale: 1.1, y: -2 }}
-          whileTap={{ scale: 0.9 }}
+          initial={{opacity: 0, scale: 0.8, y: 20}}
+          animate={{opacity: 1, scale: 1, y: 0}}
+          exit={{opacity: 0, scale: 0.8, y: 20}}
+          whileHover={{scale: 1.1, y: -2}}
+          whileTap={{scale: 0.9}}
           onClick={() => smoothScrollTo("hero")}
-          className="fixed bottom-8 right-8 z-40 p-3 bg-primary text-white rounded-full shadow-lg hover:shadow-blue-500/25 transition-all duration-300 cursor-pointer"
+          className="fixed bottom-8 right-8 z-40 p-3 border border-border bg-background text-muted-foreground hover:border-primary hover:text-primary transition-all duration-200"
           aria-label="Back to top"
         >
           <ArrowUp className="w-6 h-6" />

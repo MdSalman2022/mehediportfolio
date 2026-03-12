@@ -1,196 +1,157 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Menu, X, Github, Linkedin, Mail } from "lucide-react";
-import { usePortfolioStore } from "@/store/portfolioStore";
-import { smoothScrollTo } from "@/lib/utils";
+import {useState, useEffect} from "react";
+import {motion} from "framer-motion";
+import {Menu, X, Sun, Moon, Github, Linkedin} from "lucide-react";
+import {useTheme} from "next-themes";
+import {usePortfolioStore} from "@/store/portfolioStore";
+import {smoothScrollTo} from "@/lib/utils";
 
-const navItems = [
-  { id: "hero", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "experience", label: "Experience" },
-  { id: "projects", label: "Projects" },
-  { id: "contact", label: "Contact" },
+const navLinks = [
+  {id: "hero", label: "Home"},
+  {id: "about", label: "About"},
+  {id: "experience", label: "Experience"},
+  {id: "projects", label: "Projects"},
+  {id: "contact", label: "Contact"},
 ];
 
 export default function Navbar() {
-  const { activeSection, isMenuOpen, setMenuOpen, scrollY } =
-    usePortfolioStore();
-  const [isScrolled, setIsScrolled] = useState(false);
+  const {theme, setTheme} = useTheme();
+  const {activeSection, isMenuOpen, setMenuOpen} = usePortfolioStore();
+  const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    setMounted(true);
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
   const handleNavClick = (sectionId) => {
-    console.log("Nav click:", sectionId, "Menu open:", isMenuOpen);
-
-    if (isMenuOpen) {
-      setMenuOpen(false);
-    }
-
+    if (isMenuOpen) setMenuOpen(false);
     const delay = isMenuOpen && window.innerWidth < 768 ? 300 : 0;
-
-    setTimeout(() => {
-      console.log("Scrolling to:", sectionId);
-      smoothScrollTo(sectionId);
-    }, delay);
+    setTimeout(() => smoothScrollTo(sectionId), delay);
   };
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
+    <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-gray-900/95 backdrop-blur-md shadow-lg"
+        scrolled
+          ? "bg-background/90 backdrop-blur-xl border-b border-border"
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="text-2xl font-bold cursor-pointer"
-            onClick={() => handleNavClick("hero")}
-          >
-            <span className="text-primary font-extrabold">Mehedi</span>
-            <span className="text-white">.dev</span>
-          </motion.div>
+      <nav className="container max-w-6xl mx-auto flex items-center justify-between h-16 px-4 md:px-6">
+        {/* Logo */}
+        <button
+          onClick={() => handleNavClick("hero")}
+          className="text-xl font-bold text-foreground hover:text-primary transition-colors tracking-tight font-sans cursor-pointer"
+        >
+          mhsalman<span className="text-primary">.me</span>
+        </button>
 
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item, index) => (
-              <motion.button
-                key={item.id}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                onClick={() => handleNavClick(item.id)}
-                className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 cursor-pointer ${
-                  activeSection === item.id
-                    ? "text-white"
-                    : "text-gray-300 hover:text-white"
-                }`}
-              >
-                {item.label}
-                {activeSection === item.id && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
-                  />
-                )}
-              </motion.button>
-            ))}
-          </div>
-
-          <div className="hidden md:flex items-center space-x-4">
-            <motion.a
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5 }}
-              href="https://github.com/MdSalman2022"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 text-gray-400 hover:text-white transition-colors cursor-pointer"
-            >
-              <Github className="w-5 h-5" />
-            </motion.a>
-            <motion.a
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.6 }}
-              href="https://www.linkedin.com/in/mehedihasan-salman/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 text-gray-400 hover:text-white transition-colors cursor-pointer"
-            >
-              <Linkedin className="w-5 h-5" />
-            </motion.a>
-            <motion.a
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.7 }}
-              href="mailto:mehedi.salman102@gmail.com"
-              className="p-2 text-gray-400 hover:text-white transition-colors cursor-pointer"
-            >
-              <Mail className="w-5 h-5" />
-            </motion.a>
-          </div>
-
-          <motion.button
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            onClick={() => setMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-gray-400 hover:text-white cursor-pointer"
-          >
-            {isMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </motion.button>
-        </div>
-      </div>{" "}
-      <motion.div
-        initial={{ opacity: 0, height: 0 }}
-        animate={{
-          opacity: isMenuOpen ? 1 : 0,
-          height: isMenuOpen ? "auto" : 0,
-        }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-        className={`md:hidden overflow-hidden bg-gray-900/95 backdrop-blur-md border-t border-gray-800`}
-        style={{
-          display: isMenuOpen ? "block" : "none",
-        }}
-      >
-        <div className="px-4 py-4 space-y-2">
-          {navItems.map((item) => (
+        {/* Desktop nav */}
+        <div className="hidden md:flex items-center">
+          {navLinks.map((link) => (
             <button
-              key={item.id}
-              onClick={() => handleNavClick(item.id)}
-              className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors cursor-pointer ${
-                activeSection === item.id
-                  ? "text-white bg-gray-700/50"
-                  : "text-gray-300 hover:text-white hover:bg-gray-800"
+              key={link.id}
+              onClick={() => handleNavClick(link.id)}
+              className={`relative px-4 py-2 font-mono text-xs uppercase tracking-widest transition-colors cursor-pointer ${
+                activeSection === link.id
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-primary"
               }`}
             >
-              {item.label}
+              {link.label}
+              {activeSection === link.id && (
+                <motion.div
+                  layoutId="activeNav"
+                  className="absolute bottom-0 left-0 right-0 h-px bg-primary"
+                />
+              )}
             </button>
           ))}
+          <div className="w-px h-5 bg-border mx-3" />
+          <a
+            href="https://github.com/MdSalman2022"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 text-muted-foreground hover:text-primary transition-colors"
+            aria-label="GitHub"
+          >
+            <Github className="h-4 w-4" />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/mehedihasan-salman/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 text-muted-foreground hover:text-primary transition-colors"
+            aria-label="LinkedIn"
+          >
+            <Linkedin className="h-4 w-4" />
+          </a>
+          <div className="w-px h-5 bg-border mx-3" />
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="p-2 text-muted-foreground hover:text-primary transition-colors"
+            aria-label="Toggle theme"
+          >
+            {mounted && theme === "dark" ? (
+              <Sun className="h-4 w-4" />
+            ) : (
+              <Moon className="h-4 w-4" />
+            )}
+          </button>
+        </div>
 
-          <div className="flex items-center justify-center space-x-6 pt-4 border-t border-gray-800">
-            <a
-              href="https://github.com/MdSalman2022"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 text-gray-400 hover:text-white transition-colors cursor-pointer"
-            >
-              <Github className="w-5 h-5" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/mehedihasan-salman/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 text-gray-400 hover:text-white transition-colors cursor-pointer"
-            >
-              <Linkedin className="w-5 h-5" />
-            </a>
-            <a
-              href="mailto:mehedi.salman102@gmail.com"
-              className="p-2 text-gray-400 hover:text-white transition-colors cursor-pointer"
-            >
-              <Mail className="w-5 h-5" />
-            </a>
+        {/* Mobile controls */}
+        <div className="flex md:hidden items-center gap-1">
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="p-2 text-muted-foreground hover:text-primary transition-colors"
+            aria-label="Toggle theme"
+          >
+            {mounted && theme === "dark" ? (
+              <Sun className="h-4 w-4" />
+            ) : (
+              <Moon className="h-4 w-4" />
+            )}
+          </button>
+          <button
+            onClick={() => setMenuOpen(!isMenuOpen)}
+            className="p-2 text-muted-foreground hover:text-primary transition-colors"
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile menu */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-background border-b border-border">
+          <div className="container max-w-6xl mx-auto px-4 py-4 flex flex-col">
+            {navLinks.map((link) => (
+              <button
+                key={link.id}
+                onClick={() => handleNavClick(link.id)}
+                className={`px-4 py-3 font-mono text-xs uppercase tracking-widest text-left transition-colors border-b border-border last:border-0 ${
+                  activeSection === link.id
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-primary"
+                }`}
+              >
+                {link.label}
+              </button>
+            ))}
           </div>
         </div>
-      </motion.div>
-    </motion.nav>
+      )}
+    </header>
   );
 }
