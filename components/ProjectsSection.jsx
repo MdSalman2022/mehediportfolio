@@ -28,8 +28,8 @@ export default function ProjectsSection({projects = []}) {
     ...Array.from(new Set(projects.map((p) => p.project_type).filter(Boolean))),
   ];
 
-  // Reverse sort to show latest projects first (assuming standard array insertion order or ID order)
-  const sortedProjects = [...projects].reverse();
+  // Using the projects as-is from the API/cache to match MongoDB natural order
+  const sortedProjects = projects;
 
   const filtered =
     active === "All"

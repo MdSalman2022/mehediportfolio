@@ -35,12 +35,20 @@ export default function ProjectModal() {
     setImgIndex((i) => (i + 1) % images.length);
   };
 
-  const ProjectContent = () => (
+  const ProjectContent = ({isDrawer = false}) => (
     <>
-      <Drawer.Title className="sr-only">{selectedProject.title}</Drawer.Title>
-      <Drawer.Description className="sr-only">
-        Project details for {selectedProject.title}
-      </Drawer.Description>
+      {isDrawer ? (
+        <>
+          <Drawer.Title className="sr-only">
+            {selectedProject.title}
+          </Drawer.Title>
+          <Drawer.Description className="sr-only">
+            Project details for {selectedProject.title}
+          </Drawer.Description>
+        </>
+      ) : (
+        <h2 className="sr-only">{selectedProject.title}</h2>
+      )}
       {/* Header bar */}
       <div className="flex items-center justify-between px-6 py-4 border-b border-border shrink-0">
         <div className="flex items-center gap-3">
@@ -239,7 +247,7 @@ export default function ProjectModal() {
           <Drawer.Overlay className="fixed inset-0 bg-black/40 z-60 backdrop-blur-sm" />
           <Drawer.Content className="bg-card border-t border-border flex flex-col rounded-t-[10px] h-fit max-h-[96svh] fixed bottom-0 left-0 right-0 z-70 outline-none">
             <div className="mx-auto w-12 h-1 rounded-full bg-border mt-3 mb-1 shrink-0" />
-            <ProjectContent />
+            <ProjectContent isDrawer={true} />
           </Drawer.Content>
         </Drawer.Portal>
       </Drawer.Root>
@@ -267,7 +275,7 @@ export default function ProjectModal() {
             className="relative w-full max-w-4xl max-h-[90vh] overflow-hidden bg-card border border-border flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            <ProjectContent />
+            <ProjectContent isDrawer={false} />
           </motion.div>
         </motion.div>
       )}
