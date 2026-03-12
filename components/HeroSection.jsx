@@ -105,9 +105,9 @@ export default function HeroSection() {
               transition={{delay: 0.5}}
             >
               {[
-                "Full-stack systems with React, Next.js & TypeScript",
+                "Full-stack systems with React, Next.js, Node.js",
                 "Scalable backends with MongoDB, Postgres & Supabase",
-                "CI/CD, testing & observability (GitHub Actions, Sentry)",
+                "CI/CD, Cloud Infra (AWS/Azure) & System Observability",
               ].map((item, i) => (
                 <motion.div
                   key={i}

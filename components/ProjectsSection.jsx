@@ -99,7 +99,7 @@ export default function ProjectsSection({projects = []}) {
                   transition={{duration: 0.3, delay: i * 0.05}}
                   className={`group p-6 md:p-8 border-b border-border ${
                     i % 2 === 0 ? "md:border-r" : ""
-                  } hover:bg-accent/30 transition-colors cursor-pointer`}
+                  } hover:bg-primary/5 transition-colors cursor-pointer`}
                   onClick={() => openProjectModal(project)}
                 >
                   <div className="flex items-start justify-between mb-4">
