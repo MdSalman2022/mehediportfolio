@@ -26,9 +26,18 @@ const client = new MongoClient(uri, {
 
 try {
   await client.connect();
-  const projects = await client
-    .db(dbName)
-    .collection("projects")
+  console.log(`🔌 Connected: ${uri.replace(/\/\/[^:]+:[^@]+@/, "//<hidden>@")}`);
+
+  const db = client.db(dbName);
+  const collections = await db.listCollections().toArray();
+  console.log("📦 Collections in", dbName + ":", collections.map((c) => c.name));
+
+  const targetCollection = "Projects";
+  const docCount = await db.collection(targetCollection).countDocuments();
+  console.log(`🔍 "${targetCollection}" has ${docCount} documents`);
+
+  const projects = await db
+    .collection(targetCollection)
     .find({}, { projection: { __v: 0 } })
     .sort({ project_id: -1 })
     .toArray();

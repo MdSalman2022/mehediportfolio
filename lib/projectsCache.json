@@ -1,1 +1,254 @@
-[]
+[
+  {
+    "_id": "67a3c588a8831aedb64869c2",
+    "title": "Infinityq",
+    "technologies": [
+      "NextJs",
+      "Tailwind Css",
+      "MongoDB",
+      "Clerk"
+    ],
+    "img": [
+      "https://i.ibb.co.com/spngG52w/Screenshot-2025-02-06-020530.png"
+    ],
+    "sitelink": "https://chat.infinityq.org/",
+    "codelink": "https://github.com/MdSalman2022/",
+    "desc": "Enterprise-grade AI communications platform for modern businesses",
+    "project_id": "9",
+    "project_type": "business"
+  },
+  {
+    "_id": "63ccd545ae1ecb1948d9e165",
+    "title": "My Portfolio",
+    "technologies": [
+      "ReactJS",
+      "Tailwind Css",
+      "Framer motion",
+      "AOS",
+      "React Scroll"
+    ],
+    "img": [
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1761385102/portfolio-new_uund2t.png",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1761208011/portfolio-new_uund2t.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1761207984/portfolio-new-3_kbna4q.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1761207984/portfolio-new-4_ntnh5s.jpg"
+    ],
+    "sitelink": "https://mehediportfolio-omega.vercel.app/",
+    "codelink": "https://github.com/MdSalman2022/mehediportfolio",
+    "desc": "This is my portfolio site. It represents my skills and projects. It is made using ReactJS and Tailwind CSS. It uses Framer motion, AOS and React Scroll for animations.",
+    "project_id": "8",
+    "project_type": "portfolio"
+  },
+  {
+    "_id": "63cbd62fae1ecb19484e1a0c",
+    "title": "Restaurant & Reservation Platform",
+    "technologies": [
+      "NextJS",
+      "Tailwind Css",
+      "Typescript",
+      "Zod",
+      "Motion",
+      "Cloudflare Worker",
+      "HonoJs",
+      "MongoDB",
+      "Stripe"
+    ],
+    "img": [
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1782416388/restuarent-home_jqsqie.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1782416388/restuarent-menu_aavx0v.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1782416388/restuarent-location_riyazb.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1782416388/restuarent-reserve_lcqodm.jpg"
+    ],
+    "sitelink": "https://restuarent-cafe.mhsalman.me/",
+    "codelink": "",
+    "desc": "Designed and engineered a full-stack, multi-location digital ecosystem for a premium restaurant group spanning three distinct regional branches (North End, Seaport, and Kendall Square). The platform bridges a highly visual, mobile-first customer storefront with a secure, centralized administrative dashboard to streamline real-time hospitality operations.",
+    "project_id": "7",
+    "project_type": "business"
+  },
+  {
+    "_id": "63cbcb77ae1ecb19483ea7c4",
+    "title": "TinyFaceNFT",
+    "img": [
+      "https://i.ibb.co/6PGz5N2/project4.webp",
+      "https://i.ibb.co/dJ8N99z/project4.png",
+      "https://i.ibb.co/cFpmdy7/project4-2.png",
+      "https://i.ibb.co/jMwfbym/project4-3.png"
+    ],
+    "sitelink": "https://tinyfacenft.web.app/",
+    "codelink": "https://github.com/MdSalman2022/TinyFaceNFT",
+    "desc": "This is a NFT marketplace where you can get your own Character. You can also buy and sell NFTs.",
+    "project_id": "6",
+    "project_type": "ecommerce",
+    "technologies": [
+      "ReactJS",
+      "Tailwind Css",
+      "Daisy UI"
+    ]
+  },
+  {
+    "_id": "63987a49bdf0403bc411ad5c",
+    "title": "Embrace - Marketing Agency",
+    "technologies": [
+      "ReactJS",
+      "ExpressJS",
+      "Tailwind Css",
+      "MongoDB",
+      "Firebase"
+    ],
+    "img": [
+      "https://i.ibb.co/K6h6zw3/hero-img.webp",
+      "https://i.ibb.co/HDyVVNW/hero.png",
+      "https://i.ibb.co/n0BypY1/howitworks.png",
+      "https://i.ibb.co/RzpMH1W/meetourteam.png"
+    ],
+    "sitelink": "https://embrace-marketing-agency.netlify.app/",
+    "codelink": "https://github.com/MdSalman2022/marketing-agency-frontend",
+    "project_id": "5",
+    "desc": "The Embrace website was designed with the goal of attracting new clients and establishing the agency as a leader in the marketing industry. To achieve this, the website features clear and concise information about the agency's services, as well as a blog that offers insights and advice on marketing topics.\nIn addition to its informative content, the Embrace website also features interactive elements, including a contact form that allows potential clients to easily get in touch with the agency. With its engaging design and informative content, the Embrace website is a powerful tool for driving business and building the agency's reputation in the marketing industry.",
+    "project_type": "business"
+  },
+  {
+    "_id": "6a3d87e769ca045bf40e30a9",
+    "title": "PARX Capital Group - Funding Agency Agency",
+    "technologies": [
+      "Php",
+      "Tailwind Css",
+      "WordPress",
+      "SendGrid"
+    ],
+    "img": [
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1782417173/parx-business-home_psadwt.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1782417173/parx-products_uwgtbc.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1782417173/parx-business-solution_gwvlq8.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1782417173/parx-business-about_arco5n.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1782417172/parx-business-contact_wv5tiz.jpg"
+    ],
+    "sitelink": "https://parxcapitalgroup.com/",
+    "codelink": "",
+    "project_id": "5",
+    "desc": "Parx Capital Group is an institutional private credit and fintech funding provider. It is designed to offer fast, short-duration business loans and debt capital to established high-growth U.S. companies without requiring them to dilute their equity.",
+    "project_type": "business"
+  },
+  {
+    "_id": "68f9e32438863fe080fad259",
+    "title": "TeenIcon",
+    "technologies": [
+      "NextJs",
+      "ExpressJS",
+      "Tailwind Css",
+      "MongoDB"
+    ],
+    "img": [
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1761207170/teenicon-landing-page_sgrqkl.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1761207984/teenicon-landing-page-2_ggymhn.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1761207984/teenicon-landing-page-3_nnwx0a.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1761207984/teenicon-landing-page-4_jwzdjg.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1761207985/teenicon-landing-page-5_xvnpst.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1761207983/teenicon-landing-page-6_krjm7h.jpg"
+    ],
+    "sitelink": "https://teenicons.ai/",
+    "codelink": "",
+    "desc": "BestDeal is a cutting-edge online marketplace that boasts a variety of essential features for a seamless shopping experience. Built using the latest web technologies, including ReactJS, Tailwind CSS, Node.js, ExpressJS, and MongoDB, this e-commerce platform offers everything necessary for a robust online store. Customers can add items to their cart with ease and complete the ordering process quickly, thanks to the site's streamlined checkout process. Furthermore, BestDeal offers a secure payment gateway powered by Stripe, ensuring that customer transactions are safe and secure. In addition to providing an excellent shopping experience for customers, BestDeal also includes a powerful dashboard that allows admins to manage orders, shipments, and products with ease. This feature-rich dashboard simplifies the management of the e-commerce platform, making it easier for admins to focus on growing the business.\nOverall, BestDeal is a top-tier online marketplace that delivers a modern, feature-rich, and seamless shopping experience. Whether you're a customer looking to purchase goods or an admin seeking to manage your e-commerce business, BestDeal E-commerce has everything you need to succeed online.",
+    "project_id": "4",
+    "project_type": "social media"
+  },
+  {
+    "_id": "63987a49bdf0403bc411ad5b",
+    "title": "BestDeal",
+    "technologies": [
+      "ReactJS",
+      "ExpressJS",
+      "Tailwind Css",
+      "MongoDB",
+      "Firebase",
+      "Stripe"
+    ],
+    "img": [
+      "https://i.ibb.co/kJcNBzg/homepage-1.webp",
+      "https://i.ibb.co/kJcNBzg/homepage-1.webp",
+      "https://i.ibb.co/pz93F2R/dashboard-1.webp",
+      "https://i.ibb.co/z8Qc7q8/productpage-1.webp"
+    ],
+    "sitelink": "https://bestdeal-ecommerce.web.app/",
+    "codelink": "https://github.com/MdSalman2022/Ecommerce-site-frontend",
+    "desc": "BestDeal is a cutting-edge online marketplace that boasts a variety of essential features for a seamless shopping experience. Built using the latest web technologies, including ReactJS, Tailwind CSS, Node.js, ExpressJS, and MongoDB, this e-commerce platform offers everything necessary for a robust online store. Customers can add items to their cart with ease and complete the ordering process quickly, thanks to the site's streamlined checkout process. Furthermore, BestDeal offers a secure payment gateway powered by Stripe, ensuring that customer transactions are safe and secure. In addition to providing an excellent shopping experience for customers, BestDeal also includes a powerful dashboard that allows admins to manage orders, shipments, and products with ease. This feature-rich dashboard simplifies the management of the e-commerce platform, making it easier for admins to focus on growing the business.\nOverall, BestDeal is a top-tier online marketplace that delivers a modern, feature-rich, and seamless shopping experience. Whether you're a customer looking to purchase goods or an admin seeking to manage your e-commerce business, BestDeal E-commerce has everything you need to succeed online.",
+    "project_id": "3",
+    "project_type": "ecommerce"
+  },
+  {
+    "_id": "63cbd62fae1ecb19484e1a0b",
+    "title": "Coder's Corner",
+    "technologies": [
+      "ReactJS",
+      "Tailwind Css",
+      "ShadCn",
+      "Better Auth",
+      "MongoDB",
+      "NodeJS",
+      "ExpressJS",
+      "Gemini API"
+    ],
+    "img": [
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1761169492/coders-corner_sm79mx.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1761207983/coders-corner-2_hjhdlf.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1761207983/coders-corner-3_klaz7k.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1761207983/coders-corner-4_mplbd0.jpg"
+    ],
+    "sitelink": "https://coders-corner-client.vercel.app/",
+    "codelink": "https://github.com/MdSalman2022/CodersCorner-client",
+    "desc": "Coders Corner is a modern MERN-stack blogging platform for developers, powered by Next.js and Better Auth, where tech enthusiasts can share insights, tutorials, and experiences. Users can write and publish rich articles with tags, categories, and cover images; authenticate via Google, GitHub, or email/password; build detailed profiles showcasing bios, skills, work, and social links; engage through liking, commenting, bookmarking, and following authors; discover content via search, tags, or author pages; and access admin dashboards for content management. With responsive design, real-time interactions, secure OAuth, and optimized Vercel deployment, it fosters a vibrant developer community—join to learn, share, and connect today!",
+    "project_id": "2",
+    "project_type": "blog"
+  },
+  {
+    "_id": "6950acb586aa439f8651ada5",
+    "title": "InsightAI",
+    "technologies": [
+      "NextJS",
+      "Fastify",
+      "Tailwind Css",
+      "MongoDB",
+      "Qdrant",
+      "PassportJs"
+    ],
+    "img": [
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1766894151/corporate-gpt-1_lschh1.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1766894151/corporate-gpt-2_tsbip9.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1766894151/corporate-gpt-3_mkfc6j.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1766894151/corporate-gpt-4_yubxzz.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1766894151/corporate-gpt-5_meag66.jpg"
+    ],
+    "sitelink": "https://corporate-gpt-client.vercel.app",
+    "codelink": "https://github.com/MdSalman2022/internal-gpt-assistant",
+    "desc": "InsightAI is an enterprise AI knowledge management platform that enables organizations to query internal documents using natural language. Built with Next.js 15, Fastify, MongoDB, and Qdrant vector database, it features a complete RAG (Retrieval-Augmented Generation) pipeline with multi-LLM support (Gemini, OpenAI, Claude). The platform includes a full admin control center for user management, department-based access control, AI model configuration, usage analytics, cost monitoring, and audit logging. Secure by design with encrypted API key storage and session-based authentication. Deployed on Vercel for production use.",
+    "project_id": "10",
+    "project_type": "Enterprise SaaS"
+  },
+  {
+    "_id": "63987a49bdf0403bc411ad5d",
+    "title": "Gruham.ai",
+    "technologies": [
+      "NextJS",
+      "ReactJS",
+      "ExpressJS",
+      "Openai",
+      "Tailwind Css",
+      "MongoDB",
+      "Supabase",
+      "PubSub",
+      "Firebase"
+    ],
+    "img": [
+      "https://i.ibb.co/nNXT4TGh/designer-page.png",
+      "https://i.ibb.co/xqwT4G5H/search-page.png",
+      "https://i.ibb.co/FLfWFhML/feed-page.png",
+      "https://i.ibb.co/pvP0v0pb/Dashboard.jpg",
+      "https://i.ibb.co/jvxhZWGg/frontpage.png"
+    ],
+    "sitelink": "https://www.gruham.ai/",
+    "codelink": "",
+    "project_id": "1",
+    "desc": "Next Generation Platform for \"Interior Design\" world; confluence of Interior design firms, home owners and marketplace",
+    "project_type": "business"
+  }
+]
