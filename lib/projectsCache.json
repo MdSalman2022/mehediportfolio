@@ -1,5 +1,29 @@
 [
   {
+    "_id": "6950acb586aa439f8651ada5",
+    "title": "InsightAI",
+    "technologies": [
+      "NextJS",
+      "Fastify",
+      "Tailwind Css",
+      "MongoDB",
+      "Qdrant",
+      "PassportJs"
+    ],
+    "img": [
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1766894151/corporate-gpt-1_lschh1.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1766894151/corporate-gpt-2_tsbip9.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1766894151/corporate-gpt-3_mkfc6j.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1766894151/corporate-gpt-4_yubxzz.jpg",
+      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1766894151/corporate-gpt-5_meag66.jpg"
+    ],
+    "sitelink": "https://corporate-gpt-client.vercel.app",
+    "codelink": "https://github.com/MdSalman2022/internal-gpt-assistant",
+    "desc": "InsightAI is an enterprise AI knowledge management platform that enables organizations to query internal documents using natural language. Built with Next.js 15, Fastify, MongoDB, and Qdrant vector database, it features a complete RAG (Retrieval-Augmented Generation) pipeline with multi-LLM support (Gemini, OpenAI, Claude). The platform includes a full admin control center for user management, department-based access control, AI model configuration, usage analytics, cost monitoring, and audit logging. Secure by design with encrypted API key storage and session-based authentication. Deployed on Vercel for production use.",
+    "project_id": "10",
+    "project_type": "Enterprise SaaS"
+  },
+  {
     "_id": "67a3c588a8831aedb64869c2",
     "title": "Infinityq",
     "technologies": [
@@ -199,30 +223,6 @@
     "desc": "Coders Corner is a modern MERN-stack blogging platform for developers, powered by Next.js and Better Auth, where tech enthusiasts can share insights, tutorials, and experiences. Users can write and publish rich articles with tags, categories, and cover images; authenticate via Google, GitHub, or email/password; build detailed profiles showcasing bios, skills, work, and social links; engage through liking, commenting, bookmarking, and following authors; discover content via search, tags, or author pages; and access admin dashboards for content management. With responsive design, real-time interactions, secure OAuth, and optimized Vercel deployment, it fosters a vibrant developer community—join to learn, share, and connect today!",
     "project_id": "2",
     "project_type": "blog"
-  },
-  {
-    "_id": "6950acb586aa439f8651ada5",
-    "title": "InsightAI",
-    "technologies": [
-      "NextJS",
-      "Fastify",
-      "Tailwind Css",
-      "MongoDB",
-      "Qdrant",
-      "PassportJs"
-    ],
-    "img": [
-      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1766894151/corporate-gpt-1_lschh1.jpg",
-      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1766894151/corporate-gpt-2_tsbip9.jpg",
-      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1766894151/corporate-gpt-3_mkfc6j.jpg",
-      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1766894151/corporate-gpt-4_yubxzz.jpg",
-      "https://res.cloudinary.com/dnuulo3h5/image/upload/v1766894151/corporate-gpt-5_meag66.jpg"
-    ],
-    "sitelink": "https://corporate-gpt-client.vercel.app",
-    "codelink": "https://github.com/MdSalman2022/internal-gpt-assistant",
-    "desc": "InsightAI is an enterprise AI knowledge management platform that enables organizations to query internal documents using natural language. Built with Next.js 15, Fastify, MongoDB, and Qdrant vector database, it features a complete RAG (Retrieval-Augmented Generation) pipeline with multi-LLM support (Gemini, OpenAI, Claude). The platform includes a full admin control center for user management, department-based access control, AI model configuration, usage analytics, cost monitoring, and audit logging. Secure by design with encrypted API key storage and session-based authentication. Deployed on Vercel for production use.",
-    "project_id": "10",
-    "project_type": "Enterprise SaaS"
   },
   {
     "_id": "63987a49bdf0403bc411ad5d",

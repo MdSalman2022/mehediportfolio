@@ -39,8 +39,10 @@ try {
   const projects = await db
     .collection(targetCollection)
     .find({}, { projection: { __v: 0 } })
-    .sort({ project_id: -1 })
     .toArray();
+
+  // project_id is stored as a string; sort numerically so 10 > 9 > 8...
+  projects.sort((a, b) => Number(b.project_id || 0) - Number(a.project_id || 0));
 
   await writeFile(
     "lib/projectsCache.json",
