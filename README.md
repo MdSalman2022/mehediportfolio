@@ -4,7 +4,7 @@
 
 Welcome to my personal portfolio website! This is where I showcase my passion for creating innovative web applications and my journey as a software developer. Built with modern technologies and a focus on exceptional user experience.
 
-🌐 **Live Site:** [https://mehediportfolio-omega.vercel.app/](https://mehediportfolio-omega.vercel.app/)
+🌐 **Live Site:** [https://mhsalman.me/](https://mhsalman.me/)
 
 ## 🚀 About Me
 

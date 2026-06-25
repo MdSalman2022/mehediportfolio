@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "cf-build": "next build && wrangler deploy",
+    "refresh-projects": "node --env-file=.env.local scripts/refresh-projects.mjs",
+    "cf-build": "node --env-file=.env.local scripts/refresh-projects.mjs && next build && wrangler deploy",
     "cf-dev": "wrangler dev"
   },
   "dependencies": {
