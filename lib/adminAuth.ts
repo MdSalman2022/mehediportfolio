@@ -15,16 +15,27 @@ export async function isAuthorizedAdmin(request: Request): Promise<boolean> {
 
   const teamDomain = process.env.CF_ACCESS_TEAM_DOMAIN;
   const aud = process.env.CF_ACCESS_AUD;
-  if (!teamDomain || !aud) return false;
+  if (!teamDomain || !aud) {
+    console.error(
+      `adminAuth: missing env (teamDomain set: ${Boolean(teamDomain)}, aud set: ${Boolean(aud)})`,
+    );
+    return false;
+  }
 
   const token = request.headers.get("cf-access-jwt-assertion");
-  if (!token) return false;
+  if (!token) {
+    console.error("adminAuth: no cf-access-jwt-assertion header on request");
+    return false;
+  }
 
   try {
     jwks ??= createRemoteJWKSet(new URL(`${teamDomain}/cdn-cgi/access/certs`));
     await jwtVerify(token, jwks, { issuer: teamDomain, audience: aud });
     return true;
-  } catch {
+  } catch (error) {
+    console.error(
+      `adminAuth: JWT verification failed: ${error instanceof Error ? error.message : String(error)}`,
+    );
     return false;
   }
 }
