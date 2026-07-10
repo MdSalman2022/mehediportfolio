@@ -1,14 +1,11 @@
-// filepath: scripts/refresh-projects.mjs
-// Refreshes lib/projectsCache.json from MongoDB before a Cloudflare build.
-// Run via: npm run refresh-projects
-// Requires Node 20.6+ for the built-in --env-file flag.
+// Regenerates lib/projects.fallback.json from MongoDB.
+// Usage: npm run refresh-projects (needs Node 20.6+ for --env-file)
 
 import { writeFile } from "node:fs/promises";
 import dns from "node:dns/promises";
 import { MongoClient } from "mongodb";
 
-// Same DNS workaround used by lib/mongodb.js — system DNS on some Windows
-// setups refuses MongoDB Atlas SRV lookups (querySrv ECONNREFUSED).
+// same Windows DNS workaround as lib/mongodb.ts
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 const uri = process.env.MONGODB_URI;
@@ -36,20 +33,21 @@ try {
   const docCount = await db.collection(targetCollection).countDocuments();
   console.log(`🔍 "${targetCollection}" has ${docCount} documents`);
 
+  // Mirror the runtime query: hidden projects stay out of the snapshot too.
   const projects = await db
     .collection(targetCollection)
-    .find({}, { projection: { __v: 0 } })
+    .find({ isHidden: { $ne: true } }, { projection: { __v: 0 } })
     .toArray();
 
-  // project_id is stored as a string; sort numerically so 10 > 9 > 8...
-  projects.sort((a, b) => Number(b.project_id || 0) - Number(a.project_id || 0));
+  // project_id is stored as a string; compare numerically so 9 < 10
+  projects.sort((a, b) => Number(a.project_id || 0) - Number(b.project_id || 0));
 
   await writeFile(
-    "lib/projectsCache.json",
+    "lib/projects.fallback.json",
     JSON.stringify(projects, null, 2) + "\n"
   );
 
-  console.log(`✅ Cached ${projects.length} projects → lib/projectsCache.json`);
+  console.log(`Cached ${projects.length} projects -> lib/projects.fallback.json`);
 } catch (error) {
   console.error("❌ Failed to refresh projects cache:", error.message);
   process.exit(1);

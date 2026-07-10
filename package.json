@@ -9,13 +9,16 @@
     "lint": "next lint",
     "refresh-projects": "node --env-file=.env.local scripts/refresh-projects.mjs",
     "cf-build": "node --env-file=.env.local scripts/refresh-projects.mjs && next build && wrangler deploy",
-    "cf-dev": "wrangler dev"
+    "cf-dev": "wrangler dev",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
     "@tailwindcss/typography": "^0.5.16",
     "clsx": "^2.1.1",
     "framer-motion": "^12.14.0",
+    "jose": "^6.2.3",
     "lucide-react": "^0.511.0",
     "mongodb": "^6.16.0",
     "next": "^15.5.12",
@@ -35,9 +38,14 @@
     "@eslint/eslintrc": "^3",
     "@opennextjs/cloudflare": "^1.17.1",
     "@tailwindcss/postcss": "^4.1.16",
+    "@types/node": "^26.1.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
     "eslint": "^9",
     "eslint-config-next": "^15.5.12",
     "tailwindcss": "^4.1.16",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10",
     "wrangler": "^4.72.0"
   }
 }
